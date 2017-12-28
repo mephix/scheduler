@@ -1,0 +1,152 @@
+/* === GLOBAL === */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+a:focus {
+    outline: 0;
+}
+
+.modal-open .ui-autocomplete {
+    z-index: 9999;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #f8f9fa;
+}
+
+.table td.fit, .table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+
+.modal-dialog {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: auto;
+}
+
+/* === FAB === */
+.fab-container {
+    margin: 1em;
+    position: fixed;
+    bottom: -72px;
+    right: 0;
+    z-index: 9999;
+}
+
+.fab {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+    position: relative;
+    cursor: pointer;
+    transition: .3s;
+    outline: 0;
+}
+
+.fab:before {
+    content: attr(tooltip);
+    background: #595959;
+    padding: 4px 8px;
+    border-radius: 2px;
+    position: absolute;
+    top: 16px;
+    right: 100%;
+    color: white;
+    font: 400 15px Roboto;
+    opacity: 0;
+    visibility: hidden;
+    white-space: nowrap;
+    transition: .3s;
+}
+
+.fab:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2), 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.fab:hover:before {
+    right: 110%;
+    opacity: 1;
+    visibility: visible;
+}
+
+.resident, .job, .schedule {
+    margin-bottom: 1em;
+}
+
+.resident:after {
+    background: #007aeb url("https://cbwconline.com/IMG/Codepen/Profile.svg") center no-repeat;
+}
+
+.job:after {
+    background: #007aeb url("https://cbwconline.com/IMG/Codepen/Profile.svg") center no-repeat;
+}
+
+.schedule:after {
+    background: #007aeb url("https://cbwconline.com/IMG/Codepen/Profile.svg") center no-repeat;
+}
+
+.resident:after, .job:after, .schedule:after {
+    position: absolute;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: .2s;
+}
+
+.resident:hover:after, .job:hover:after, .schedule:hover:after {
+    background-image: url("https://cbwconline.com/IMG/Codepen/Add.svg");
+    transform: rotate(90deg);
+}
+
+.top {
+    background: #868e96 url("https://cbwconline.com/IMG/Codepen/Up.svg") center no-repeat;
+}
+
+/* === BREAKPOINTS === */
+/*
+@media screen and (max-width: 767px) {
+    table.table thead {
+        display: none;
+    }
+
+    table.table tbody td {
+        display: block;
+    }
+
+    table.table tbody td:before {
+        content: attr(data-th);
+        font-weight: bold;
+        display: inline-block;
+        width: 3rem;
+    }
+
+    body {
+        padding-top: 4rem;
+    }
+
+    .responsive-lg {
+        display: none !important;
+    }
+
+    .modal-dialog {
+        min-height: calc(100vh - 20px);
+    }
+}
+
+@media (min-width: 767px) {
+    body {
+        padding-top: 5rem;
+    }
+
+    .responsive-sm {
+        display: none !important;
+    }
+}
+*/
