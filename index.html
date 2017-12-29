@@ -16,27 +16,11 @@
     </head>
     <body>
         <!--### NAVIGATION ###-->
-        <ul class="navbar nav responsive-sm nav-pills nav-fill nav-justified fixed-top bg-white" role="pillList">
-            <li class="nav-item dropdown">
-                <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="tab">Manage</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item active" data-toggle="tab" href="#residents" role="tab" aria-controls="residents" aria-select="true">Residents</a>
-                    <a class="dropdown-item" data-toggle="tab" href="#jobs" role="tab" aria-controls="jobs" aria-select="false">Jobs</a>
-                    <a class="dropdown-item" data-toggle="tab" href="#schedules" role="tab" aria-controls="schedules" aria-select="false">Schedules</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#calendars" role="tab" aria-controls="calendars" aria-select="false">Calendar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#patients" role="tab" aria-controls="patients" aria-select="false">Patients</a>
-            </li>
-        </ul>
         <nav class="navbar nav responsive-lg nav-pills fixed-top ml-auto bg-white" role="pillList">
             <a class="navbar-brand text-muted" href="#">Denali</a>
             <ul class="nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="tab">Manage</a>
+                    <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="tab">Admin</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item active" data-toggle="tab" href="#residents" role="tab" aria-controls="residents" aria-select="true">Residents</a>
                         <a class="dropdown-item" data-toggle="tab" href="#jobs" role="tab" aria-controls="jobs" aria-select="false">Jobs</a>
@@ -352,8 +336,8 @@
                             <table class="table table-hover " id="scheduleTable">
                                 <thead class="thead">
                                     <th class="border-top-0">Job(s)</th>
-                                    <th class="border-top-0">Start</th>
-                                    <th class="border-top-0">End</th>
+                                    <th class="border-top-0">From</th>
+                                    <th class="border-top-0">To</th>
                                     <th class="border-top-0 fit responsive-lg"></th>
                                     <th class="border-top-0 fit responsive-lg"></th>
                                 </thead>
@@ -415,17 +399,9 @@
                             <!-- ./edit modal dialog -->
                         </div>
                         <!-- ./edit modal -->
-                        <!-- search table -->
-                        <form>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-search"></i>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Filter..." ng-model="searchEvent">
-                                </div>
-                            </div>
-                        </form>
+                       
+                        <div class="card bg-light">
+                        <div class="card-body"
                         <!-- results -->
                         <div class="calendar-table">
                             <table class="table table-sm">
@@ -444,13 +420,13 @@
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                            Start <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+                                            Shift Start <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
                                             <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                            End <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+                                            Shift End <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
                                             <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
                                         </a>
                                     </th>
@@ -464,6 +440,8 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        </div>
                         </div>
                     </div>
                     <!-- ./tab column -->
@@ -495,7 +473,7 @@
                         
                         <!-- results -->
                         <div class="calendar-table">
-                            <table class="table table-sm">
+                            <table class="table">
                                 <thead class="thead">
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'jobName'; sortReverse = !sortReverse">
@@ -511,17 +489,18 @@
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                            Start <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+                                            Shift Start <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
                                             <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                            End <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+                                            Shift End <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
                                             <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
                                         </a>
                                     </th>
                                 </thead>
+                                <!-- the calendar table will show all schedules created by the admin in the schedules tab -->
                                 <tbody ng-repeat="schedule in schedules">
                                     <tr ng-repeat="event in schedule.events | orderBy:['-id','-level'] | orderBy:sortType:!sortReverse | filter:viewDate | filter:searchEvent">
                                         <td>{{event.jobName}}</td>

@@ -868,6 +868,9 @@ myApp.controller('myCtrl', function($scope, $filter) {
     // which means the angular variables need to be converted
     $scope.findSchedule = function(schedule) {
         var index = $scope.schedules.indexOf(schedule);
+        
+        //resets the schedule's events when user hits Generate button
+        $scope.schedules[index].events = []
 
         var residentsWithFieldsChanged = []
 
@@ -925,6 +928,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
         frequencyOfNightShifts = results[2].frequency_of_night_shifts
         fullCalendarDaysOff = results[2].full_calendar_days_off
         fullCalendarDaysOffPerCycle = results[2].full_calendar_days_off_per_cycle
+
 
         // allow the user to set the shift length in hours
         var shiftLength = 12;
