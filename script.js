@@ -184,7 +184,9 @@ myApp.controller('myCtrl', function($scope, $filter) {
     $scope.triggerResidentForm = false;
     $scope.editResidentForm = false;
     $scope.addResidentForm = false;
-    $scope.order = 'name';
+
+    
+
     // seed resident data
     $scope.residents = [{
         id: 1,
@@ -519,7 +521,6 @@ myApp.controller('myCtrl', function($scope, $filter) {
     $scope.triggerJobForm = false;
     $scope.editJobForm = false;
     $scope.addJobForm = false;
-    $scope.order = 'team';
     // seed jobs data
     $scope.jobs = [{
         id: 1,
@@ -803,7 +804,6 @@ myApp.controller('myCtrl', function($scope, $filter) {
     $scope.triggerScheduleForm = false;
     $scope.editScheduleForm = false;
     $scope.addScheduleForm = false;
-    $scope.order = 'startDate';
     // seed schedule data
     $scope.schedules = [{
         id: 1,
@@ -984,8 +984,9 @@ myApp.controller('myCtrl', function($scope, $filter) {
                         'id': s,
                         // job name
                         'jobName': $scope.jobs[j].name,
+                        'jobLevel': ($scope.jobs[j].level).reverse(),
                         // assigned residents
-                        'residents': assignedResidents,
+                        'residents': assignedResidents.sort(),
                         // shift start datetime
                         'start': {
                             'dateTime': shiftStartDateTime,
@@ -1003,21 +1004,22 @@ myApp.controller('myCtrl', function($scope, $filter) {
                 }
             }
         }
-
     }
-        // allow the user to view one day at a time, add and subtract days
+    // allow the user to view one day at a time, add and subtract days
+    $scope.viewDate = moment().format("ddd, DD MMM YYYY");
+
+    $scope.today = function() {
         $scope.viewDate = moment().format("ddd, DD MMM YYYY");
+    }
 
-        $scope.today = function() {
-            $scope.viewDate = moment().format("ddd, DD MMM YYYY");
-        }
-        $scope.increment = function() {
-            $scope.viewDate = moment($scope.viewDate, "ddd, DD MMM YYYY").add(1, "day").format("ddd, DD MMM YYYY");
+    $scope.increment = function() {
+        $scope.viewDate = moment($scope.viewDate, "ddd, DD MMM YYYY").add(1, "day").format("ddd, DD MMM YYYY");
+    }
 
-        }
-        $scope.decrement = function() {
-            $scope.viewDate = moment($scope.viewDate, "ddd, DD MMM YYYY").subtract(1, "day").format("ddd, DD MMM YYYY");
-        }
+    $scope.decrement = function() {
+        $scope.viewDate = moment($scope.viewDate, "ddd, DD MMM YYYY").subtract(1, "day").format("ddd, DD MMM YYYY");
+    }
+    $scope.viewDateLong = moment($scope.viewDate,"ddd, DD MMM YYYY").format("dddd, MMMM Do YYYY")
 })
 
 /* ====================== */

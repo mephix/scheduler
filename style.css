@@ -1,11 +1,4 @@
 /* === GLOBAL === */
-body {
-    font-family: 'Roboto', sans-serif;
-}
-
-a:focus {
-    outline: 0;
-}
 
 .modal-open .ui-autocomplete {
     z-index: 9999;
@@ -108,6 +101,17 @@ a:focus {
 .top {
     background: #868e96 url("https://cbwconline.com/IMG/Codepen/Up.svg") center no-repeat;
 }
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+a:focus {
+    outline: 0;
+}
+
+
 
 /* === BREAKPOINTS === */
 /*
