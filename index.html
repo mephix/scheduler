@@ -113,9 +113,7 @@
                                         <td class="align-middle responsive-lg" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.email}}</td>
                                         <td class="align-middle" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.team}}</td>
                                         <td class="align-middle responsive-lg text-right fit">
-                                            <button class="close" ng-click="deleteResident(resident)">
-                                                <span>&times;</span>
-                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm fa fa-trash" ng-click="deleteResident(resident)"></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -205,7 +203,6 @@
                         <div class="job-table">
                             <table class="table table-hover " id="jobTable">
                                 <thead class="thead">
-                                    
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
                                             Job <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
@@ -253,9 +250,7 @@
                                         <td class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.level}}</td>
                                         <td class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.count}}</td>
                                         <td class="align-middle text-right fit responsive-lg">
-                                            <button type="button" class="close" aria-label="Close" ng-click="deleteJob(job)">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm fa fa-trash" ng-click="deleteJob(job)"></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -333,26 +328,74 @@
                         </div>
                         <!-- content table -->
                         <div class="schedule-table">
-                            <table class="table table-hover " id="scheduleTable">
+                            <table class="table" id="scheduleTable">
                                 <thead class="thead">
                                     <th class="border-top-0">Job(s)</th>
                                     <th class="border-top-0">From</th>
                                     <th class="border-top-0">To</th>
                                     <th class="border-top-0 fit responsive-lg"></th>
-                                    <th class="border-top-0 fit responsive-lg"></th>
                                 </thead>
-                                <tbody class="text">
-                                    <tr ng-repeat="schedule in schedules">
-                                        <th class="align-middle" data-toggle="modal" data-target="#scheduleModal" ng-click="editSchedule(schedule)">{{schedule.jobName}}</th>
-                                        <td class="align-middle" data-toggle="modal" data-target="#scheduleModal" ng-click="editSchedule(schedule)">{{schedule.startDate}}</td>
-                                        <td class="align-middle" data-toggle="modal" data-target="#scheduleModal" ng-click="editSchedule(schedule)">{{schedule.endDate}}</td>
+                                <tbody class="text" ng-repeat="schedule in schedules">
+                                    <tr>
+                                        <th class="align-middle" ng-click="showDetails = ! showDetails">{{schedule.jobName}}</th>
+                                        <td class="align-middle" ng-click="showDetails = ! showDetails">{{schedule.startDate}}</td>
+                                        <td class="align-middle" ng-click="showDetails = ! showDetails">{{schedule.endDate}}</td>
                                         <td class="align-middle text-right fit">
-                                            <button class="btn btn-outline-success btn-sm" id="findSchedule-button" ng-click="findSchedule(schedule)">Generate</button>
+                                            <button class="btn btn-outline-warning btn-sm fa fa-edit" data-toggle="modal" data-target="#scheduleModal" ng-click="editSchedule(schedule)"></button>
+                                            <button class="btn btn-outline-danger btn-sm fa fa-trash" ng-click="deleteSchedule(schedule)"></button>
                                         </td>
-                                        <td class="align-middle text-right fit responsive-lg ">
-                                            <button type="button" class="close" aria-label="Close" ng-click="deleteSchedule(schedule)">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5" ng-show="showDetails" class="border-top-0">
+                                            <!-- card with table of schedule results, embedded in a table-->
+                                            <div class="card bg-light">
+                                                <div class="card-body">
+                                                    <!-- results -->
+                                                    <div class="calendar-table">
+                                                        <input type="text" class="form-control mb-4" placeholder="Filter..." ng-model="searchEvent">
+                                                        <table class="table table-sm bg-transparent">
+                                                            <thead class="thead">
+                                                                <th class="border-top-0">
+                                                                    <a href="#" ng-click="sortType = 'jobName'; sortReverse = !sortReverse">
+                                                                        Job <span ng-show="sortType == 'jobName' && !sortReverse" class="fa fa-caret-down"></span>
+                                                                        <span ng-show="sortType == 'jobName' && sortReverse" class="fa fa-caret-up"></span>
+                                                                    </a>
+                                                                </th>
+                                                                <th class="border-top-0">
+                                                                    <a href="#" ng-click="sortType = 'residents'; sortReverse = !sortReverse">
+                                                                        Residents <span ng-show="sortType == 'residents' && !sortReverse" class="fa fa-caret-down"></span>
+                                                                        <span ng-show="sortType == 'residents' && sortReverse" class="fa fa-caret-up"></span>
+                                                                    </a>
+                                                                </th>
+                                                                <th class="border-top-0">
+                                                                    <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+                                                                        Shift Start <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+                                                                        <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+                                                                    </a>
+                                                                </th>
+                                                                <th class="border-top-0">
+                                                                    <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+                                                                        Shift End <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+                                                                        <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+                                                                    </a>
+                                                                </th>
+                                                                <th class="border-top-0">
+                                                                    <button class="btn btn-outline-success btn-sm fa fa-refresh" id="findSchedule-button" ng-click="findSchedule(schedule)"></button>
+                                                                </th>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="event in schedule.events | orderBy:['-id','-level'] | orderBy:sortType:!sortReverse | filter:searchEvent">
+                                                                    <td>{{event.jobName}}</td>
+                                                                    <td>{{event.residents}}</td>
+                                                                    <td>{{event.start.dateTime}}</td>
+                                                                    <td>{{event.end.dateTime}}</td>
+                                                                    <td class="fit"></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -399,50 +442,6 @@
                             <!-- ./edit modal dialog -->
                         </div>
                         <!-- ./edit modal -->
-                       
-                        <div class="card bg-light">
-                        <div class="card-body"
-                        <!-- results -->
-                        <div class="calendar-table">
-                            <table class="table table-sm">
-                                <thead class="thead">
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'jobName'; sortReverse = !sortReverse">
-                                            Job <span ng-show="sortType == 'jobName' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'jobName' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'residents'; sortReverse = !sortReverse">
-                                            Residents <span ng-show="sortType == 'residents' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'residents' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                            Shift Start <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                            Shift End <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                </thead>
-                                <tbody ng-repeat="schedule in schedules">
-                                    <tr ng-repeat="event in schedule.events | orderBy:['-id','-level'] | orderBy:sortType:!sortReverse | filter:searchEvent">
-                                        <td>{{event.jobName}}</td>
-                                        <td>{{event.residents}}</td>
-                                        <td class="fit">{{event.start.dateTime}}</td>
-                                        <td class="fit">{{event.end.dateTime}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        </div>
-                        </div>
                     </div>
                     <!-- ./tab column -->
                 </div>
@@ -451,7 +450,7 @@
                 <div class="tab-pane" id="calendars" role="tabpanel" aria-labelledby="calendars-tab">
                     <div class="col-lg-12">
                         <h1 class="mt-4" id="header">{{viewDateLong}}</h1>
-                         <!-- view date -->
+                        <!-- view date -->
                         <!-- fab -->
                         <div class="fab-container">
                             <div class="top fab" onclick=scrollToTop() tooltip="Back To Top"></div>
@@ -462,15 +461,12 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <button class="btn btn-primary input-group-addon fa fa-caret-left" ng-click="decrement()"></button>
-
                                     <button class="btn btn-primary input-group-addon" ng-click="today()">Today</button>
                                     <button class="btn btn-primary input-group-addon fa fa-caret-right" ng-click="increment()"></button>
-
                                     <input type="text" class="form-control" placeholder="Filter..." ng-model="searchEvent">
                                 </div>
                             </div>
                         </form>
-                        
                         <!-- results -->
                         <div class="calendar-table">
                             <table class="table">
@@ -530,6 +526,12 @@
 											
 									
                                     
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                     </p>
                                     <p class="card-text">
                                         <small class="text-muted bottom mr-2">Team</small>
@@ -537,6 +539,12 @@
 											
 											
 									
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                     
                                     </p>
                                     <p class="card-text">
@@ -546,6 +554,12 @@
 											
 									
                                     
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                     </p>
                                     <p class="card-text">
                                         <small class="text-muted bottom mr-2">Email</small>
@@ -553,6 +567,12 @@
 											
 											
 									
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                     
                                     </p>
                                 </div>
