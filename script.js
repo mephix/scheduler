@@ -809,41 +809,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
         startDate: '12/25/2017',
         endDate: '01/22/2018',
         fetchDateTime: [],
-        events: [{
-            'id': 'id',
-            'jobName': 'jobname',
-            'jobLevel': 'joblevel',
-            'residents': 'residents',
-            'start': {
-                'dateTime': 'startdatetime',
-                'timeZone': 'America/Los_Angeles'
-            },
-            'end': {
-                'dateTime': 'enddatetime',
-                'timeZone': 'America/Los_Angeles'
-            }
-        }]
-        },
-        {
-        id: 2,
-        jobName: ['AC Acute Chief', 'AC Acute Consult', 'AC Acute Floor'],
-        startDate: '12/25/2017',
-        endDate: '01/22/2018',
-        fetchDateTime: [],
-        events: [{
-            'id': 'id',
-            'jobName': 'jobname2',
-            'jobLevel': 'joblevel2',
-            'residents': 'residents2',
-            'start': {
-                'dateTime': 'startdatetime2',
-                'timeZone': 'America/Los_Angeles'
-            },
-            'end': {
-                'dateTime': 'enddatetime2',
-                'timeZone': 'America/Los_Angeles'
-            }
-        }]
+        events: []
     }];
     // trigger schedule edit form
     $scope.editSchedule = function(schedule) {
@@ -897,25 +863,12 @@ myApp.controller('myCtrl', function($scope, $filter) {
         $scope.scheduleFormStartDate = '';
         $scope.scheduleFormEndDate = '';
     }
-
-    // show schedule's events
-    $scope.showCalendar = function(schedule) {
-       var index = $scope.schedules.indexOf(schedule);
-        $scope.triggerScheduleForm = true;
-        $scope.editScheduleForm = true;
-        $scope.addScheduleForm = false;
-        $scope.editScheduleId = index;
-        $scope.scheduleFormJobName = $scope.schedules[index].jobName;
-        $scope.scheduleFormStartDate = $scope.schedules[index].startDate;
-        $scope.scheduleFormEndDate = $scope.schedules[index].endDate;
-    }
-    
     /* === CONVERT VARIABLES === */
     // JP's code runs outside of angular, 
     // which means the angular variables need to be converted
     $scope.findSchedule = function(schedule) {
         var index = $scope.schedules.indexOf(schedule);
-
+        
         //resets the schedule's events when user hits Generate button
         $scope.schedules[index].events = []
 
@@ -932,7 +885,6 @@ myApp.controller('myCtrl', function($scope, $filter) {
             res._level = res.level
             residentsWithFieldsChanged.push(res)
         }
-
         var jobsWithFieldsChanged = []
 
         // for each job ()
@@ -976,6 +928,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
         frequencyOfNightShifts = results[2].frequency_of_night_shifts
         fullCalendarDaysOff = results[2].full_calendar_days_off
         fullCalendarDaysOffPerCycle = results[2].full_calendar_days_off_per_cycle
+
 
         // allow the user to set the shift length in hours
         var shiftLength = 12;
@@ -1056,7 +1009,8 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }
     // allow the user to view one day at a time, add and subtract days
     $scope.viewDate = moment().format("ddd, DD MMM YYYY");
-    $scope.viewDateLong = moment($scope.viewDate, "ddd, DD MMM YYYY").format("dddd, MMMM Do YYYY")
+    $scope.viewDateLong = moment($scope.viewDate,"ddd, DD MMM YYYY").format("dddd, MMMM Do YYYY")
+
 
     $scope.today = function() {
         $scope.viewDate = moment().format("ddd, DD MMM YYYY");
