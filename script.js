@@ -185,8 +185,6 @@ myApp.controller('myCtrl', function($scope, $filter) {
     $scope.editResidentForm = false;
     $scope.addResidentForm = false;
 
-    
-
     // seed resident data
     $scope.residents = [{
         id: 1,
@@ -1007,19 +1005,26 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }
     // allow the user to view one day at a time, add and subtract days
     $scope.viewDate = moment().format("ddd, DD MMM YYYY");
+    $scope.viewDateLong = moment($scope.viewDate,"ddd, DD MMM YYYY").format("dddd, MMMM Do YYYY")
+
 
     $scope.today = function() {
         $scope.viewDate = moment().format("ddd, DD MMM YYYY");
+        $scope.viewDateLong = moment($scope.viewDate, "ddd, DD MMM YYYY").format("dddd, MMMM Do YYYY")
+
     }
 
     $scope.increment = function() {
         $scope.viewDate = moment($scope.viewDate, "ddd, DD MMM YYYY").add(1, "day").format("ddd, DD MMM YYYY");
+        $scope.viewDateLong = moment($scope.viewDate, "ddd, DD MMM YYYY").format("dddd, MMMM Do YYYY")
+
     }
 
     $scope.decrement = function() {
         $scope.viewDate = moment($scope.viewDate, "ddd, DD MMM YYYY").subtract(1, "day").format("ddd, DD MMM YYYY");
+        $scope.viewDateLong = moment($scope.viewDate, "ddd, DD MMM YYYY").format("dddd, MMMM Do YYYY")
+
     }
-    $scope.viewDateLong = moment($scope.viewDate,"ddd, DD MMM YYYY").format("dddd, MMMM Do YYYY")
 })
 
 /* ====================== */
