@@ -1,608 +1,615 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Denali</title>
-        <!-- bootstrap core css -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css">
-        <!-- custom css styles -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
-    <body>
-        <!--### NAVIGATION ###-->
-        <ul class="navbar nav responsive-sm nav-pills nav-fill nav-justified fixed-top bg-white" role="pillList">
-            <li class="nav-item dropdown">
-                <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="tab">Manage</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item active" data-toggle="tab" href="#residents" role="tab" aria-controls="residents" aria-select="true">Residents</a>
-                    <a class="dropdown-item" data-toggle="tab" href="#jobs" role="tab" aria-controls="jobs" aria-select="false">Jobs</a>
-                    <a class="dropdown-item" data-toggle="tab" href="#schedules" role="tab" aria-controls="schedules" aria-select="false">Schedules</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#calendars" role="tab" aria-controls="calendars" aria-select="false">Calendar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#patients" role="tab" aria-controls="patients" aria-select="false">Patients</a>
-            </li>
-        </ul>
-        <nav class="navbar nav responsive-lg nav-pills fixed-top ml-auto bg-white" role="pillList">
-            <a class="navbar-brand text-muted" href="#">Denali</a>
-            <ul class="nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="tab">Manage</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item active" data-toggle="tab" href="#residents" role="tab" aria-controls="residents" aria-select="true">Residents</a>
-                        <a class="dropdown-item" data-toggle="tab" href="#jobs" role="tab" aria-controls="jobs" aria-select="false">Jobs</a>
-                        <a class="dropdown-item" data-toggle="tab" href="#schedules" role="tab" aria-controls="schedules" aria-select="false">Schedules</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#calendars" role="tab" aria-controls="calendars" aria-select="false">Calendar</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#patients" role="tab" aria-controls="patients" aria-select="false">Patients</a>
-                </li>
-            </ul>
-        </nav>
-        <!--### INSTRUCTIONS ###-->
-        <div class="container">
-            <div class="col-lg-12">
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <span>This is where I'll put some instructions.</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-            <!-- ./instructions -->
-            <div class="tab-content" id="tabContent" ng-app="myApp" ng-controller="myCtrl">
-                <!--### RESIDENTS ###-->
-                <div class="tab-pane show active" id="residents" role="tabpanel" aria-labelledby="residents-tab">
-                    <div class="col-lg-12">
-                        <h1 class="mt-4" id="header">Residents</h1>
-                        <!-- fab -->
-                        <div class="fab-container">
-                            <a href="#" data-toggle="modal" data-target="#residentModal" ng-click="addResident(resident)">
-                                <div class="resident fab" tooltip="Add Resident"></div>
-                            </a>
-                            <div class="top fab" onclick=scrollToTop() tooltip="Back To Top"></div>
-                        </div>
-                        <!-- search table -->
-                        <form>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-search"></i>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Filter..." ng-model="searchResident">
-                                </div>
-                            </div>
-                        </form>
-                        <!-- content table -->
-                        <div class="resident-table">
-                            <table class="table table-hover" id="residentTable">
-                                <thead class="thead">
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-                                            Name <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'level'; sortReverse = !sortReverse">
-                                            Level <span ng-show="sortType == 'level' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'level' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'pager'; sortReverse = !sortReverse">
-                                            Pager <span ng-show="sortType == 'pager' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'pager' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'email'; sortReverse = !sortReverse">
-                                            Email <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'team'; sortReverse = !sortReverse">
-                                            Current Assignment <span ng-show="sortType == 'team' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'team' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0 fit responsive-lg"></th>
-                                </thead>
-                                <tbody class="text">
-                                    <tr ng-repeat="resident in residents | orderBy:['-level','name'] | orderBy:sortType:sortReverse | filter:searchResident">
-                                        <th class="align-middle" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.name}}</th>
-                                        <td class="align-middle" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.level}} </td>
-                                        <td class="align-middle" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.pager}}</td>
-                                        <td class="align-middle responsive-lg" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.email}}</td>
-                                        <td class="align-middle" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.team}}</td>
-                                        <td class="align-middle responsive-lg text-right fit">
-                                            <button class="close" ng-click="deleteResident(resident)">
-                                                <span>&times;</span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- ./content table-->
-                        <!-- edit modal -->
-                        <div class="modal fade" id="residentModal" tabindex="-1">
-                            <!-- edit modal dialog -->
-                            <div class="modal-dialog">
-                                <div class="modal-content resident-form__wrapper" ng-show="triggerResidentForm">
-                                    <form ng-model="residentForm">
-                                        <div class="modal-header bg-light">
-                                            <h5 class="modal-title" ng-show="editResidentForm">Edit Resident Information</h5>
-                                            <h5 class="modal-title" ng-show="addResidentForm">New Resident</h5>
-                                            <button class="close" data-dismiss="modal" ng-click="triggerResidentForm=false">
-                                                <span>&times;</span>
-                                            </button>
-                                        </div>
-                                        <!-- ./edit modal header -->
-                                        <!-- edit modal body -->
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label class="text-muted small" for="name">Name</label>
-                                                <input class="form-control" id="editResidentName" ng-model="residentFormName" placeholder=""/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="text-muted small" for="level">Level</label>
-                                                <input class="form-control" id="editLevel" ng-model="residentFormLevel" placeholder=""/>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-4">
-                                                    <label class="text-muted small" for="pager">Pager</label>
-                                                    <input class="form-control pager-format" id="editPager" ng-model="residentFormPager" placeholder=""/>
-                                                </div>
-                                                <div class="form-group col-md-8">
-                                                    <label class="text-muted small" for="email">Email</label>
-                                                    <input class="form-control" id="editEmail" ng-model="residentFormEmail" ng-change="checkEmail(editResidentId)" placeholder=""/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="text-muted small" for="team">Team</label>
-                                                <input class="form-control" id="editTeam" ng-model="residentFormTeam" placeholder=""/>
-                                            </div>
-                                        </div>
-                                        <!-- ./edit modal body -->
-                                        <!-- edit modal footer -->
-                                        <div class="modal-footer">
-                                            <button class="btn btn-outline-danger" ng-click="deleteResident(resident)" data-dismiss="modal">Delete</button>
-                                            <button class="btn btn-primary" ng-click="saveResidentEdit(editResidentId)" ng-disabled="residentForm.$invalid || emailExisted" data-dismiss="modal">Save</button>
-                                        </div>
-                                        <!-- ./edit modal footer -->
-                                    </form>
-                                </div>
-                                <!-- ./edit modal content -->
-                            </div>
-                            <!-- ./edit modal dialog -->
-                        </div>
-                        <!-- ./edit modal -->
-                    </div>
-                    <!-- ./tab column -->
-                </div>
-                <!-- ./tab pane -->
-                <!--### JOBS ###-->
-                <div class="tab-pane" id="jobs" role="tabpanel" aria-labelledby="jobs-tab">
-                    <div class="col-lg-12">
-                        <h1 class="mt-4" id="header">Jobs</h1>
-                        <!-- fab -->
-                        <div class="fab-container">
-                            <a href="#" data-toggle="modal" data-target="#jobModal" ng-click="addJob(job)">
-                                <div class="job fab" tooltip="Add Job"></div>
-                            </a>
-                            <div class="top fab" onclick=scrollToTop() tooltip="Back To Top"></div>
-                        </div>
-                        <!-- search table -->
-                        <form>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-search"></i>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Filter..." ng-model="searchJob">
-                                </div>
-                            </div>
-                        </form>
-                        <!-- content table -->
-                        <div class="job-table">
-                            <table class="table table-hover " id="jobTable">
-                                <thead class="thead">
-                                    
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-                                            Job <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'dow'; sortReverse = !sortReverse">
-                                            Days <span ng-show="sortType == 'dow' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'dow' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'tod'; sortReverse = !sortReverse">
-                                            Time <span ng-show="sortType == 'tod' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'tod' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'team'; sortReverse = !sortReverse">
-                                            Covering Team(s) <span ng-show="sortType == 'team' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'team' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'level'; sortReverse = !sortReverse">
-                                            Required Level(s) <span ng-show="sortType == 'level' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'level' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'count'; sortReverse = !sortReverse">
-                                            Required Count <span ng-show="sortType == 'count' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'count' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0 fit responsive-lg "></th>
-                                </thead>
-                                <tbody class="text">
-                                    <tr ng-repeat="job in jobs | orderBy:['dow','tod','team','-level'] | orderBy:sortType:sortReverse | filter:searchJob">
-                                        <th class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.name}}</th>
-                                        <td class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.dow}}</td>
-                                        <td class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.tod}}</td>
-                                        <th class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.team}}</th>
-                                        <td class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.level}}</td>
-                                        <td class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.count}}</td>
-                                        <td class="align-middle text-right fit responsive-lg">
-                                            <button type="button" class="close" aria-label="Close" ng-click="deleteJob(job)">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- ./content table-->
-                        <!-- edit modal -->
-                        <div class="modal fade" id="jobModal" tabindex="-1" role="dialog" aria-labelledby="jobModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="dialog">
-                                <div class="modal-content job-form__wrapper" ng-show="triggerJobForm">
-                                    <form name="jobForm" ng-model="jobForm">
-                                        <div class="modal-header bg-light">
-                                            <h5 class="modal-title" ng-show="editJobForm">Edit Job Information</h5>
-                                            <h5 class="modal-title" ng-show="addJobForm">New Job</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="triggerJobForm = false">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <!-- ./edit modal header -->
-                                        <!-- edit modal body -->
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label class="text-muted small" for="team">Team</label>
-                                                <input class="form-control" id="editTeam" type="text" name="team" ng-model="jobFormTeam" placeholder="Edit team" required="required"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="text-muted small" for="name">Job Name</label>
-                                                <input class="form-control" id="editName" type="text" name="name" ng-model="jobFormName" placeholder="Edit job name" required="required"/>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-5">
-                                                    <label class="text-muted small" for="dow">Time of Day</label>
-                                                    <input class="form-control" id="editDow" type="text" name="dow" ng-model="jobFormDow" placeholder="Edit day of week"/>
-                                                </div>
-                                                <div class="form-group col-7">
-                                                    <label class="text-muted small" for="tod">Time of Day</label>
-                                                    <input class="form-control" id="editTod" type="text" name="tod" ng-model="jobFormTod" placeholder="Edit time of day"/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="text-muted small" for="level">Level</label>
-                                                <input class="form-control" id="editLevel" type="text" name="level" ng-model="jobFormLevel" placeholder="Required level" required="required"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="text-muted small" for="count">Count</label>
-                                                <input class="form-control" id="editCount" type="number" name="count" ng-model="jobFormCount" placeholder="Edit count"/>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-danger" ng-click="deleteJob(job)" data-dismiss="modal">Delete</button>
-                                            <button class="btn btn-primary" ng-click="saveJobEdit(editJobId)" ng-disabled="jobForm.$invalid" data-dismiss="modal">Save</button>
-                                        </div>
-                                        <!-- ./edit modal footer -->
-                                    </form>
-                                </div>
-                                <!-- ./edit modal content -->
-                            </div>
-                            <!-- ./edit modal dialog -->
-                        </div>
-                        <!-- ./edit modal -->
-                    </div>
-                    <!-- ./tab column -->
-                </div>
-                <!-- ./tab pane -->
-                <!--### SCHEDULES ###-->
-                <div class="tab-pane" id="schedules" role="tabpanel" aria-labelledby="schedules-tab">
-                    <div class="col-lg-12 mb-4">
-                        <h1 class="mt-4" id="header">Schedules</h1>
-                        <!-- fab -->
-                        <div class="fab-container">
-                            <a href="#" data-toggle="modal" data-target="#scheduleModal" ng-click="addSchedule(schedule)">
-                                <div class="schedule fab" tooltip="Add Schedule"></div>
-                            </a>
-                            <div class="top fab" onclick=scrollToTop() tooltip="Back To Top"></div>
-                        </div>
-                        <!-- content table -->
-                        <div class="schedule-table">
-                            <table class="table table-hover " id="scheduleTable">
-                                <thead class="thead">
-                                    <th class="border-top-0">Job(s)</th>
-                                    <th class="border-top-0">Start</th>
-                                    <th class="border-top-0">End</th>
-                                    <th class="border-top-0 fit responsive-lg"></th>
-                                    <th class="border-top-0 fit responsive-lg"></th>
-                                </thead>
-                                <tbody class="text">
-                                    <tr ng-repeat="schedule in schedules">
-                                        <th class="align-middle" data-toggle="modal" data-target="#scheduleModal" ng-click="editSchedule(schedule)">{{schedule.jobName}}</th>
-                                        <td class="align-middle" data-toggle="modal" data-target="#scheduleModal" ng-click="editSchedule(schedule)">{{schedule.startDate}}</td>
-                                        <td class="align-middle" data-toggle="modal" data-target="#scheduleModal" ng-click="editSchedule(schedule)">{{schedule.endDate}}</td>
-                                        <td class="align-middle text-right fit">
-                                            <button class="btn btn-outline-success btn-sm" id="findSchedule-button" ng-click="findSchedule(schedule)">Generate</button>
-                                        </td>
-                                        <td class="align-middle text-right fit responsive-lg ">
-                                            <button type="button" class="close" aria-label="Close" ng-click="deleteSchedule(schedule)">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- edit modal -->
-                        <div class="modal fade" id="scheduleModal" tabindex="-1">
-                            <!-- edit modal dialog -->
-                            <div class="modal-dialog">
-                                <div class="modal-content schedule-form__wrapper" ng-show="triggerScheduleForm">
-                                    <form ng-model="scheduleForm">
-                                        <div class="modal-header bg-light">
-                                            <h5 class="modal-title" ng-show="editScheduleForm">Edit Schedule Details</h5>
-                                            <h5 class="modal-title" ng-show="addScheduleForm">New Schedule</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="triggerScheduleForm = false">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label class="text-muted small" for="name">Requested Job</label>
-                                                <input class="form-control" id="editName" type="text" name="name" ng-model="scheduleFormName">
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label class="text-muted small" for="startDate">Start Date</label>
-                                                    <input id="datepicker" name="startDate" class="form-control startdatepicker" ng-model="scheduleFormStartDate">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label class="text-muted small" for="endDate">End Date</label>
-                                                    <input id="datepicker" name="endDate" class="form-control enddatepicker" ng-model="scheduleFormEndDate">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-danger" ng-click="deleteSchedule(schedule)" data-dismiss="modal">Delete</button>
-                                            <button class="btn btn-primary" ng-click="saveScheduleEdit(editScheduleId)" ng-disabled="scheduleForm.$invalid" data-dismiss="modal">Save</button>
-                                        </div>
-                                        <!-- ./edit modal footer -->
-                                    </form>
-                                </div>
-                                <!-- ./edit modal content -->
-                            </div>
-                            <!-- ./edit modal dialog -->
-                        </div>
-                        <!-- ./edit modal -->
-                        <!-- search table -->
-                        <form>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-search"></i>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Filter..." ng-model="searchEvent">
-                                </div>
-                            </div>
-                        </form>
-                        <!-- results -->
-                        <div class="calendar-table">
-                            <table class="table table-sm">
-                                <thead class="thead">
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'jobName'; sortReverse = !sortReverse">
-                                            Job <span ng-show="sortType == 'jobName' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'jobName' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'residents'; sortReverse = !sortReverse">
-                                            Residents <span ng-show="sortType == 'residents' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'residents' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                            Start <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                            End <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                </thead>
-                                <tbody ng-repeat="schedule in schedules">
-                                    <tr ng-repeat="event in schedule.events | orderBy:['-id','-level'] | orderBy:sortType:!sortReverse | filter:searchEvent">
-                                        <td>{{event.jobName}}</td>
-                                        <td>{{event.residents}}</td>
-                                        <td class="fit">{{event.start.dateTime}}</td>
-                                        <td class="fit">{{event.end.dateTime}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- ./tab column -->
-                </div>
-                <!-- ./tab pane -->
-                <!--### CALENDAR ###-->
-                <div class="tab-pane" id="calendars" role="tabpanel" aria-labelledby="calendars-tab">
-                    <div class="col-lg-12">
-                        <h1 class="mt-4" id="header">{{viewDateLong}}</h1>
-                         <!-- view date -->
-                        
-
-                       
-
-                        
-                        <!-- fab -->
-                        <div class="fab-container">
-                            <div class="top fab" onclick=scrollToTop() tooltip="Back To Top"></div>
-                        </div>
-                        <!-- ./fab -->
-                        <!-- search table -->
-                        <form>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <button class="btn btn-primary input-group-addon fa fa-caret-left" ng-click="decrement()"></button>
-
-                                    <button class="btn btn-primary input-group-addon" ng-click="today()">Today</button>
-                                    <button class="btn btn-primary input-group-addon fa fa-caret-right" ng-click="increment()"></button>
-
-                                    <input type="text" class="form-control" placeholder="Filter..." ng-model="searchEvent">
-                                </div>
-                            </div>
-                        </form>
-                        
-                        <!-- results -->
-                        <div class="calendar-table">
-                            <table class="table table-sm">
-                                <thead class="thead">
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'jobName'; sortReverse = !sortReverse">
-                                            Job <span ng-show="sortType == 'jobName' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'jobName' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'residents'; sortReverse = !sortReverse">
-                                            Residents <span ng-show="sortType == 'residents' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'residents' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                            Start <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                    <th class="border-top-0">
-                                        <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                            End <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
-                                        </a>
-                                    </th>
-                                </thead>
-                                <tbody ng-repeat="schedule in schedules">
-                                    <tr ng-repeat="event in schedule.events | orderBy:['-id','-level'] | orderBy:sortType:!sortReverse | filter:viewDate | filter:searchEvent">
-                                        <td>{{event.jobName}}</td>
-                                        <td>{{event.residents}}</td>
-                                        <td class="fit">{{event.start.dateTime}}</td>
-                                        <td class="fit">{{event.end.dateTime}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- ./tab pane -->
-                <!--### PATIENTS ###-->
-                <div class="tab-pane" id="patients" role="tabpanel" aria-labelledby="patients-tab">
-                    <div class="col-lg-12">
-                        <h1 class="mt-4" id="header">Patients</h1>
-                        <!-- Cards -->
-                        <div class="card-columns">
-                            <div class="card" ng-repeat="resident in residents | orderBy:sortType:sortReverse | filter:searchResident">
-                                <h4 class="card-header">{{resident.name}}</h4>
-                                <div class="card-body" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">
-                                    <p class="card-text">
-                                        <small class="text-muted bottom mr-2">Level</small>
-                                        {{resident.level}}
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>Denali</title>
+		<!-- bootstrap core css -->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css">
+		<!-- custom css styles -->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<!--### NAVIGATION ###-->
+		<ul class="navbar nav responsive-sm nav-pills nav-fill nav-justified fixed-top bg-white" role="pillList">
+			<li class="nav-item dropdown">
+				<a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="tab">Manage</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item active" data-toggle="tab" href="#residents" role="tab" aria-controls="residents" aria-select="true">Residents</a>
+					<a class="dropdown-item" data-toggle="tab" href="#jobs" role="tab" aria-controls="jobs" aria-select="false">Jobs</a>
+					<a class="dropdown-item" data-toggle="tab" href="#schedules" role="tab" aria-controls="schedules" aria-select="false">Schedules</a>
+				</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#calendars" role="tab" aria-controls="calendars" aria-select="false">Calendar</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#patients" role="tab" aria-controls="patients" aria-select="false">Patients</a>
+			</li>
+		</ul>
+		<nav class="navbar nav responsive-lg nav-pills fixed-top ml-auto bg-white" role="pillList">
+			<a class="navbar-brand text-muted" href="#">Denali</a>
+			<ul class="nav">
+				<li class="nav-item dropdown">
+					<a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="tab">Manage</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item active" data-toggle="tab" href="#residents" role="tab" aria-controls="residents" aria-select="true">Residents</a>
+						<a class="dropdown-item" data-toggle="tab" href="#jobs" role="tab" aria-controls="jobs" aria-select="false">Jobs</a>
+						<a class="dropdown-item" data-toggle="tab" href="#schedules" role="tab" aria-controls="schedules" aria-select="false">Schedules</a>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#calendars" role="tab" aria-controls="calendars" aria-select="false">Calendar</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#patients" role="tab" aria-controls="patients" aria-select="false">Patients</a>
+				</li>
+			</ul>
+		</nav>
+		<!--### INSTRUCTIONS ###-->
+		<div class="container">
+			<div class="col-lg-12">
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					<span>This is where I'll put some instructions.</span>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			</div>
+			<!-- ./instructions -->
+			<div class="tab-content" id="tabContent" ng-app="myApp" ng-controller="myCtrl">
+				<!--### RESIDENTS ###-->
+				<div class="tab-pane show active" id="residents" role="tabpanel" aria-labelledby="residents-tab">
+					<div class="col-lg-12">
+						<h1 class="mt-4" id="header">Residents</h1>
+						<!-- fab -->
+						<div class="fab-container">
+							<a href="#" data-toggle="modal" data-target="#residentModal" ng-click="addResident(resident)">
+								<div class="resident fab" tooltip="Add Resident"></div>
+							</a>
+							<div class="top fab" onclick=scrollToTop() tooltip="Back To Top"></div>
+						</div>
+						<!-- search table -->
+						<form>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-search"></i>
+									</div>
+									<input type="text" class="form-control" placeholder="Filter..." ng-model="searchResident">
+								</div>
+							</div>
+						</form>
+						<!-- content table -->
+						<div class="resident-table">
+							<table class="table table-hover" id="residentTable">
+								<thead class="thead">
+									<th class="border-top-0">
+										<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+											Name <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th class="border-top-0">
+										<a href="#" ng-click="sortType = 'level'; sortReverse = !sortReverse">
+											Level <span ng-show="sortType == 'level' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'level' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th class="border-top-0">
+										<a href="#" ng-click="sortType = 'pager'; sortReverse = !sortReverse">
+											Pager <span ng-show="sortType == 'pager' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'pager' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th class="border-top-0">
+										<a href="#" ng-click="sortType = 'email'; sortReverse = !sortReverse">
+											Email <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th class="border-top-0">
+										<a href="#" ng-click="sortType = 'team'; sortReverse = !sortReverse">
+											Team <span ng-show="sortType == 'team' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'team' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th class="border-top-0 fit responsive-lg"></th>
+								</thead>
+								<tbody class="text">
+									<tr ng-repeat="resident in residents | orderBy:sortType:sortReverse | filter:searchResident">
+										<th class="align-middle" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.name}}</th>
+										<td class="align-middle" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.level}} </td>
+										<td class="align-middle" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.pager}}</td>
+										<td class="align-middle responsive-lg" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.email}}</td>
+										<td class="align-middle" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.team}}</td>
+										<td class="align-middle responsive-lg text-right fit">
+											<button class="close" ng-click="deleteResident(resident)">
+												<span>&times;</span>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- ./content table-->
+						<!-- edit modal -->
+						<div class="modal fade" id="residentModal" tabindex="-1">
+							<!-- edit modal dialog -->
+							<div class="modal-dialog">
+								<div class="modal-content resident-form__wrapper" ng-show="triggerResidentForm">
+									<form ng-model="residentForm">
+										<div class="modal-header bg-light">
+											<h5 class="modal-title" ng-show="editResidentForm">Edit Resident Information</h5>
+											<h5 class="modal-title" ng-show="addResidentForm">New Resident</h5>
+											<button class="close" data-dismiss="modal" ng-click="triggerResidentForm=false">
+												<span>&times;</span>
+											</button>
+										</div>
+										<!-- ./edit modal header -->
+										<!-- edit modal body -->
+										<div class="modal-body">
+											<div class="form-group">
+												<label class="text-muted small" for="name">Name</label>
+												<input class="form-control" id="editResidentName" ng-model="residentFormName" placeholder=""/>
+											</div>
+											<div class="form-group">
+												<label class="text-muted small" for="level">Level</label>
+												<input class="form-control" id="editLevel" ng-model="residentFormLevel" placeholder=""/>
+											</div>
+											<div class="form-row">
+												<div class="form-group col-md-4">
+													<label class="text-muted small" for="pager">Pager</label>
+													<input class="form-control pager-format" id="editPager" ng-model="residentFormPager" placeholder=""/>
+												</div>
+												<div class="form-group col-md-8">
+													<label class="text-muted small" for="email">Email</label>
+													<input class="form-control" id="editEmail" ng-model="residentFormEmail" ng-change="checkEmail(editResidentId)" placeholder=""/>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="text-muted small" for="team">Team</label>
+												<input class="form-control" id="editTeam" ng-model="residentFormTeam" placeholder=""/>
+											</div>
+										</div>
+										<!-- ./edit modal body -->
+										<!-- edit modal footer -->
+										<div class="modal-footer">
+											<button class="btn btn-outline-danger" ng-click="deleteResident(resident)" data-dismiss="modal">Delete</button>
+											<button class="btn btn-primary" ng-click="saveResidentEdit(editResidentId)" ng-disabled="residentForm.$invalid || emailExisted" data-dismiss="modal">Save</button>
+										</div>
+										<!-- ./edit modal footer -->
+									</form>
+								</div>
+								<!-- ./edit modal content -->
+							</div>
+							<!-- ./edit modal dialog -->
+						</div>
+						<!-- ./edit modal -->
+					</div>
+					<!-- ./tab column -->
+				</div>
+				<!-- ./tab pane -->
+				<!--### JOBS ###-->
+				<div class="tab-pane" id="jobs" role="tabpanel" aria-labelledby="jobs-tab">
+					<div class="col-lg-12">
+						<h1 class="mt-4" id="header">Jobs</h1>
+						<!-- fab -->
+						<div class="fab-container">
+							<a href="#" data-toggle="modal" data-target="#jobModal" ng-click="addJob(job)">
+								<div class="job fab" tooltip="Add Job"></div>
+							</a>
+							<div class="top fab" onclick=scrollToTop() tooltip="Back To Top"></div>
+						</div>
+						<!-- search table -->
+						<form>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-search"></i>
+									</div>
+									<input type="text" class="form-control" placeholder="Filter..." ng-model="searchJob">
+								</div>
+							</div>
+						</form>
+						<!-- content table -->
+						<div class="job-table">
+							<table class="table table-hover " id="jobTable">
+								<thead class="thead">
+									<th class="border-top-0">
+										<a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+											ID <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th class="border-top-0">
+										<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+											Job <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th class="border-top-0">
+										<a href="#" ng-click="sortType = 'dow'; sortReverse = !sortReverse">
+											Days <span ng-show="sortType == 'dow' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'dow' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th class="border-top-0">
+										<a href="#" ng-click="sortType = 'tod'; sortReverse = !sortReverse">
+											Time <span ng-show="sortType == 'tod' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'tod' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th class="border-top-0">
+										<a href="#" ng-click="sortType = 'team'; sortReverse = !sortReverse">
+											Covering Team(s) <span ng-show="sortType == 'team' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'team' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th class="border-top-0">
+										<a href="#" ng-click="sortType = 'level'; sortReverse = !sortReverse">
+											Required Level(s) <span ng-show="sortType == 'level' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'level' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th class="border-top-0">
+										<a href="#" ng-click="sortType = 'count'; sortReverse = !sortReverse">
+											Required Count <span ng-show="sortType == 'count' && !sortReverse" class="fa fa-caret-down"></span>
+											<span ng-show="sortType == 'count' && sortReverse" class="fa fa-caret-up"></span>
+										</a>
+									</th>
+									<th class="border-top-0 fit responsive-lg "></th>
+								</thead>
+								<tbody class="text">
+									<tr ng-repeat="job in jobs | orderBy:sortType:sortReverse | filter:searchJob">
+										<th class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.id}}</th>
+										<th class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.name}}</th>
+										<td class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.dow}}</td>
+										<td class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.tod}}</td>
+										<th class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.team}}</th>
+										<td class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.level}}</td>
+										<td class="align-middle" data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.count}}</td>
+										<td class="align-middle text-right fit responsive-lg">
+											<button type="button" class="close" aria-label="Close" ng-click="deleteJob(job)">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- ./content table-->
+						<!-- edit modal -->
+						<div class="modal fade" id="jobModal" tabindex="-1" role="dialog" aria-labelledby="jobModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="dialog">
+								<div class="modal-content job-form__wrapper" ng-show="triggerJobForm">
+									<form name="jobForm" ng-model="jobForm">
+										<div class="modal-header bg-light">
+											<h5 class="modal-title" ng-show="editJobForm">Edit Job Information</h5>
+											<h5 class="modal-title" ng-show="addJobForm">New Job</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="triggerJobForm = false">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<!-- ./edit modal header -->
+										<!-- edit modal body -->
+										<div class="modal-body">
+											<div class="form-group">
+												<label class="text-muted small" for="team">Team</label>
+												<input class="form-control" id="editTeam" type="text" name="team" ng-model="jobFormTeam" placeholder="Edit team" required="required"/>
+											</div>
+											<div class="form-group">
+												<label class="text-muted small" for="name">Job Name</label>
+												<input class="form-control" id="editName" type="text" name="name" ng-model="jobFormName" placeholder="Edit job name" required="required"/>
+											</div>
+											<div class="form-row">
+												<div class="form-group col-md-5">
+													<label class="text-muted small" for="dow">Time of Day</label>
+													<input class="form-control" id="editDow" type="text" name="dow" ng-model="jobFormDow" placeholder="Edit day of week"/>
+												</div>
+												<div class="form-group col-7">
+													<label class="text-muted small" for="tod">Time of Day</label>
+													<input class="form-control" id="editTod" type="text" name="tod" ng-model="jobFormTod" placeholder="Edit time of day"/>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="text-muted small" for="level">Level</label>
+												<input class="form-control" id="editLevel" type="text" name="level" ng-model="jobFormLevel" placeholder="Required level" required="required"/>
+											</div>
+											<div class="form-group">
+												<label class="text-muted small" for="count">Count</label>
+												<input class="form-control" id="editCount" type="number" name="count" ng-model="jobFormCount" placeholder="Edit count"/>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-outline-danger" ng-click="deleteJob(job)" data-dismiss="modal">Delete</button>
+											<button class="btn btn-primary" ng-click="saveJobEdit(editJobId)" ng-disabled="jobForm.$invalid" data-dismiss="modal">Save</button>
+										</div>
+										<!-- ./edit modal footer -->
+									</form>
+								</div>
+								<!-- ./edit modal content -->
+							</div>
+							<!-- ./edit modal dialog -->
+						</div>
+						<!-- ./edit modal -->
+					</div>
+					<!-- ./tab column -->
+				</div>
+				<!-- ./tab pane -->
+				<!--### SCHEDULES ###-->
+				<div class="tab-pane" id="schedules" role="tabpanel" aria-labelledby="schedules-tab">
+					<div class="col-lg-12 mb-4">
+						<h1 class="mt-4" id="header">Schedules</h1>
+						<!-- fab -->
+						<div class="fab-container">
+							<a href="#" data-toggle="modal" data-target="#scheduleModal" ng-click="addSchedule(schedule)">
+								<div class="schedule fab" tooltip="Add Schedule"></div>
+							</a>
+							<div class="top fab" onclick=scrollToTop() tooltip="Back To Top"></div>
+						</div>
+						<!-- content table -->
+						<div class="schedule-table">
+							<table class="table table-hover " id="scheduleTable">
+								<thead class="thead">
+									<th class="border-top-0">Job(s)</th>
+									<th class="border-top-0">Start</th>
+									<th class="border-top-0">End</th>
+									<th class="border-top-0 fit responsive-lg"></th>
+									<th class="border-top-0 fit responsive-lg"></th>
+								</thead>
+								<tbody class="text">
+									<tr ng-repeat="schedule in schedules">
+										<th class="align-middle" data-toggle="modal" data-target="#scheduleModal" ng-click="editSchedule(schedule)">{{schedule.jobName}}</th>
+										<td class="align-middle" data-toggle="modal" data-target="#scheduleModal" ng-click="editSchedule(schedule)">{{schedule.startDate}}</td>
+										<td class="align-middle" data-toggle="modal" data-target="#scheduleModal" ng-click="editSchedule(schedule)">{{schedule.endDate}}</td>
+										<td class="align-middle text-right fit">
+											<button class="btn btn-outline-success btn-sm" id="findSchedule-button" ng-click="findSchedule(schedule)">Generate</button>
+										</td>
+										<td class="align-middle text-right fit responsive-lg ">
+											<button type="button" class="close" aria-label="Close" ng-click="deleteSchedule(schedule)">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- edit modal -->
+						<div class="modal fade" id="scheduleModal" tabindex="-1">
+							<!-- edit modal dialog -->
+							<div class="modal-dialog">
+								<div class="modal-content schedule-form__wrapper" ng-show="triggerScheduleForm">
+									<form ng-model="scheduleForm">
+										<div class="modal-header bg-light">
+											<h5 class="modal-title" ng-show="editScheduleForm">Edit Schedule Details</h5>
+											<h5 class="modal-title" ng-show="addScheduleForm">New Schedule</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="triggerScheduleForm = false">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<div class="form-group">
+												<label class="text-muted small" for="name">Requested Job</label>
+												<input class="form-control" id="editName" type="text" name="name" ng-model="scheduleFormName">
+											</div>
+											<div class="form-row">
+												<div class="form-group col-md-6">
+													<label class="text-muted small" for="startDate">Start Date</label>
+													<input id="datepicker" name="startDate" class="form-control startdatepicker" ng-model="scheduleFormStartDate">
+												</div>
+												<div class="form-group col-md-6">
+													<label class="text-muted small" for="endDate">End Date</label>
+													<input id="datepicker" name="endDate" class="form-control enddatepicker" ng-model="scheduleFormEndDate">
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-outline-danger" ng-click="deleteSchedule(schedule)" data-dismiss="modal">Delete</button>
+											<button class="btn btn-primary" ng-click="saveScheduleEdit(editScheduleId)" ng-disabled="scheduleForm.$invalid" data-dismiss="modal">Save</button>
+										</div>
+										<!-- ./edit modal footer -->
+									</form>
+								</div>
+								<!-- ./edit modal content -->
+							</div>
+							<!-- ./edit modal dialog -->
+						</div>
+						<!-- ./edit modal -->
+						<!-- search table -->
+						<form>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-search"></i>
+									</div>
+									<input type="text" class="form-control" placeholder="Filter..." ng-model="searchEvent">
+								</div>
+							</div>
+						</form>
+						<!-- results -->
+						<div class="card bg-light">
+							<div class="calendar-table">
+								<h4 class="card-header" id="header">Generated Calendars</h4>
+								<div class="card-body">
+									<table class="table table-sm">
+										<thead class="thead">
+											<th class="border-top-0">
+												<a href="#" ng-click="sortType = 'jobName'; sortReverse = !sortReverse">
+													Job <span ng-show="sortType == 'jobName' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'jobName' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th class="border-top-0">
+												<a href="#" ng-click="sortType = 'residents'; sortReverse = !sortReverse">
+													Residents <span ng-show="sortType == 'residents' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'residents' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th class="border-top-0">
+												<a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+													Start <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th class="border-top-0">
+												<a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+													End <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+										</thead>
+										<tbody ng-repeat="schedule in schedules">
+											<tr ng-repeat="event in schedule.events | orderBy:sortType:!sortReverse | filter:searchEvent">
+												<td>{{event.jobName}}</td>
+												<td>{{event.residents}}</td>
+												<td class="fit">{{event.start.dateTime}}</td>
+												<td class="fit">{{event.end.dateTime}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- ./ card body -->
+							</div>
+						</div>
+					</div>
+					<!-- ./tab column -->
+				</div>
+				<!-- ./tab pane -->
+				<!--### CALENDAR ###-->
+				<div class="tab-pane" id="calendars" role="tabpanel" aria-labelledby="calendars-tab">
+					<div class="col-lg-12">
+						<h1 class="mt-4" id="header">Calendar</h1>
+						<!-- fab -->
+						<div class="fab-container">
+							<div class="top fab" onclick=scrollToTop() tooltip="Back To Top"></div>
+						</div>
+						<!-- ./fab -->
+						<!-- search table -->
+						<form>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-search"></i>
+									</div>
+									<input type="text" class="form-control" placeholder="Filter..." ng-model="searchEvent">
+								</div>
+							</div>
+						</form>
+						<!-- view date -->
+						<div class="btn-group btn-block mb-2">
+						<button class="btn btn-secondary fa fa-caret-down" ng-click="decrement()"></button>
+						<button class="btn btn-secondary btn-block" ng-click="today()">{{viewDate}}</button>
+						<button class="btn btn-secondary fa fa-caret-up" ng-click="increment()"></button>
+						</div>
+						<!-- results -->
+						<div class="card bg-light">
+							<div class="calendar-table">
+								<h4 class="card-header" id="header">Generated Calendars</h4>
+								<div class="card-body">
+									<table class="table table-sm">
+										<thead class="thead">
+											<th class="border-top-0">
+												<a href="#" ng-click="sortType = 'jobName'; sortReverse = !sortReverse">
+													Job <span ng-show="sortType == 'jobName' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'jobName' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th class="border-top-0">
+												<a href="#" ng-click="sortType = 'residents'; sortReverse = !sortReverse">
+													Residents <span ng-show="sortType == 'residents' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'residents' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th class="border-top-0">
+												<a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+													Start <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th class="border-top-0">
+												<a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
+													End <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+										</thead>
+										<tbody ng-repeat="schedule in schedules">
+											<tr ng-repeat="event in schedule.events | orderBy:sortType:!sortReverse | filter:viewDate | filter:searchEvent">
+												<td>{{event.jobName}}</td>
+												<td>{{event.residents}}</td>
+												<td class="fit">{{event.start.dateTime}}</td>
+												<td class="fit">{{event.end.dateTime}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- ./ card body -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ./tab pane -->
+				<!--### PATIENTS ###-->
+				<div class="tab-pane" id="patients" role="tabpanel" aria-labelledby="patients-tab">
+					<div class="col-lg-12">
+						<h1 class="mt-4" id="header">Patients</h1>
+						<!-- Cards -->
+						<div class="card-columns">
+							<div class="card" ng-repeat="resident in residents | orderBy:sortType:sortReverse | filter:searchResident">
+								<h4 class="card-header">{{resident.name}}</h4>
+								<div class="card-body" data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">
+									<p class="card-text">
+										<small class="text-muted bottom mr-2">Level</small>
+										{{resident.level}}
 											
 											
-									
-                                    
-                                    </p>
-                                    <p class="card-text">
-                                        <small class="text-muted bottom mr-2">Team</small>
-                                        {{resident.team}}
+									</p>
+									<p class="card-text">
+										<small class="text-muted bottom mr-2">Team</small>
+										{{resident.team}}
 											
 											
-									
-                                    
-                                    </p>
-                                    <p class="card-text">
-                                        <small class="text-muted bottom mr-2">Pager</small>
-                                        {{resident.pager}}
+									</p>
+									<p class="card-text">
+										<small class="text-muted bottom mr-2">Pager</small>
+										{{resident.pager}}
 											
 											
-									
-                                    
-                                    </p>
-                                    <p class="card-text">
-                                        <small class="text-muted bottom mr-2">Email</small>
-                                        {{resident.email}}
+									</p>
+									<p class="card-text">
+										<small class="text-muted bottom mr-2">Email</small>
+										{{resident.email}}
 											
 											
-									
-                                    
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ./Cards -->
-                    </div>
-                </div>
-                <!-- ./tab pane -->
-            </div>
-            <!-- ./tab content -->
-        </div>
-        <!-- ./ container-->
-        <!-- ./content container -->
-        <!--### JAVASCRIPTS ###-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.17.0/math.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/AuspeXeu/bootstrap-datetimepicker/master/js/bootstrap-datetimepicker.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" crossorigin="anonymous"></script>
-        <!--script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script-->
-        <script type="text/javascript" src="script.js"></script>
-    </body>
+									</p>
+								</div>
+							</div>
+						</div>
+						<!-- ./Cards -->
+					</div>
+				</div>
+				<!-- ./tab pane -->
+			</div>
+			<!-- ./tab content -->
+		</div>
+		<!-- ./ container-->
+		<!-- ./content container -->
+		<!--### JAVASCRIPTS ###-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.17.0/math.js"></script>
+		<script type="text/javascript" src="https://rawgit.com/AuspeXeu/bootstrap-datetimepicker/master/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" crossorigin="anonymous"></script>
+		<!--script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script-->
+		<script type="text/javascript" src="script.js"></script>
+	</body>
 </html>
