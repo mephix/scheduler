@@ -808,33 +808,90 @@ myApp.controller('myCtrl', function($scope, $filter) {
     $scope.schedules = [{
         id: 1,
         names: [{
-            id: 1,
-            team: ['AC Acute'],
-            name: 'AC Acute Chief',
-            dow: 'weekday',
-            tod: 'day',
-            level: ['5', '3'],
-            count: 1,
-        }, {
-            id: 2,
-            team: ['AC Acute'],
-            name: 'AC Acute Consult',
-            dow: 'weekday',
-            tod: 'day',
-            level: ['2', '3'],
-            count: 1,
-        }, {
-            id: 3,
-            team: ['AC Acute'],
-            name: 'AC Acute Floor',
-            dow: 'weekday',
-            tod: 'day',
-            level: ['1'],
-            count: 1,
-        }],
+        id: 1,
+        team: ['AC Acute'],
+        name: 'AC Acute Chief',
+        dow: 'weekday',
+        tod: 'day',
+        level: ['5', '3'],
+        count: 1,
+    }, {
+        id: 2,
+        team: ['AC Acute'],
+        name: 'AC Acute Consult',
+        dow: 'weekday',
+        tod: 'day',
+        level: ['2', '3'],
+        count: 1,
+    }, {
+        id: 3,
+        team: ['AC Acute'],
+        name: 'AC Acute Floor',
+        dow: 'weekday',
+        tod: 'day',
+        level: ['1'],
+        count: 1,
+    }],
         startDate: '12/25/2017',
         endDate: '01/22/2018',
-        events: []
+        events: [{
+            'id': 'id',
+            'jobName': 'jobname',
+            'jobLevel': 'joblevel',
+            'residents': 'residents',
+            'start': {
+                'dateTime': 'startdatetime',
+                'timeZone': 'America/Los_Angeles'
+            },
+            'end': {
+                'dateTime': 'enddatetime',
+                'timeZone': 'America/Los_Angeles'
+            }
+        }]
+        },
+        {
+        id: 2,
+        names: [{
+        id: 6,
+        team: ['AC ES'],
+        name: 'AC ES Floor',
+        dow: 'weekday',
+        tod: 'day',
+        level: ['1'],
+        count: 1,
+    }, {
+        id: 7,
+        team: ['AC ES'],
+        name: 'AC ES Assist',
+        dow: 'weekday',
+        tod: 'day',
+        level: ['2', '3'],
+        count: 1,
+    }, {
+        id: 8,
+        team: ['AC ES'],
+        name: 'AC ES Chief',
+        dow: 'weekday',
+        tod: 'day',
+        level: ['5'],
+        count: 1,
+    }],
+        startDate: '12/25/2017',
+        endDate: '01/22/2018',
+        events: [{
+            'id': 'id',
+            'jobName': 'jobname2',
+            'jobLevel': 'joblevel2',
+            'residents': 'residents2',
+            'start': {
+                'dateTime': 'startdatetime2',
+                'timeZone': 'America/Los_Angeles'
+            },
+            'end': {
+                'dateTime': 'enddatetime2',
+                'timeZone': 'America/Los_Angeles'
+            }
+        }]
     }];
 
     // trigger schedule edit form
@@ -844,9 +901,18 @@ myApp.controller('myCtrl', function($scope, $filter) {
         $scope.editScheduleForm = true;
         $scope.addScheduleForm = false;
         $scope.editScheduleId = index;
-///////////////
+        $scope.scheduleFormNames = $scope.schedules[index].names
+        $scope.scheduleFormStartDate = $scope.schedules[index].startDate;
+        $scope.scheduleFormEndDate = $scope.schedules[index].endDate;
+        $scope.scheduleFormEvents = $scope.schedules[index].events;
+
+        ///////////////
+
+         $scope.content = '';
+
         $scope.isChecked = function(id) {
             var match = false;
+
             for (var i = 0; i < $scope.scheduleFormNames.length; i++) {
                 if ($scope.scheduleFormNames[i].id == id) {
                     match = true;
@@ -859,10 +925,14 @@ myApp.controller('myCtrl', function($scope, $filter) {
         $scope.allOptions = $scope.jobs;
 
 
+
+
+
         $scope.sync = function(bool, item) {
             if (bool) {
                 // add item
                 $scope.scheduleFormNames.push(item);
+                
             } else {
                 // remove item
                 for (var i = 0; i < $scope.scheduleFormNames.length; i++) {
@@ -872,16 +942,15 @@ myApp.controller('myCtrl', function($scope, $filter) {
                 }
             }
         }
-        ;
-///////////////
-        $scope.scheduleFormNames = $scope.schedules[index].names;
-        $scope.scheduleFormStartDate = $scope.schedules[index].startDate;
-        $scope.scheduleFormEndDate = $scope.schedules[index].endDate;
-        $scope.scheduleFormEvents = $scope.schedules[index].events;
+        
+        ///////////////
 
     }
     // save new or edited schedule form
     $scope.saveScheduleEdit = function(scheduleId) {
+
+       
+
         if (scheduleId == 'new') {
             var newSchedule = {
                 names: $scope.scheduleFormNames,
@@ -899,9 +968,12 @@ myApp.controller('myCtrl', function($scope, $filter) {
 
         }
         // close edit forms
+
         $scope.triggerScheduleForm = false;
         $scope.editScheduleForm = false;
+        $scope.addScheduleForm = false;
         $scope.editScheduleId = 0;
+
     }
     // remove schedule object from schedule array
     $scope.deleteSchedule = function(schedule) {
@@ -916,29 +988,27 @@ myApp.controller('myCtrl', function($scope, $filter) {
         $scope.editScheduleForm = false;
         $scope.addScheduleForm = true;
         $scope.scheduleForm.$setUntouched();
-        $scope.scheduleFormNames = '';
+        $scope.scheduleFormNames = [];
         $scope.scheduleFormStartDate = '';
         $scope.scheduleFormEndDate = '';
-        $scope.scheduleFormEvents = '';
-
+        $scope.scheduleFormEvents = [];
+        $scope.allOptions = $scope.jobs;
     }
 
     /* === SHOW CALENDARS === */
 
-    /*$scope.showCalendar = function(schedule) {
-        var index = $scope.schedules.indexOf(schedule);
+// show schedule's events
+    $scope.showCalendar = function(schedule) {
+       var index = $scope.schedules.indexOf(schedule);
         $scope.triggerScheduleForm = true;
         $scope.editScheduleForm = true;
         $scope.addScheduleForm = false;
         $scope.editScheduleId = index;
-        
-
-        $scope.scheduleFormJobName = $scope.schedules[index].names;
+        $scope.scheduleFormNames = $scope.schedules[index].names;
         $scope.scheduleFormStartDate = $scope.schedules[index].startDate;
         $scope.scheduleFormEndDate = $scope.schedules[index].endDate;
-
-    }*/
-
+    }
+ 
     /* === CONVERT VARIABLES === */
     // JP's code runs outside of angular, 
     // which means the angular variables need to be converted
@@ -947,15 +1017,6 @@ myApp.controller('myCtrl', function($scope, $filter) {
 
         //resets the schedule's events when user hits Generate button
         $scope.schedules[index].events = []
-
-        // set the startdate, enddate, (and jobname(s)) from the schedule form
-        var startdate = new Date($scope.schedules[index].startDate);
-        var enddate = new Date($scope.schedules[index].endDate);
-        var jobname = []
-        for (let j = 0, job; j < $scope.schedules[index].names.length; j++) {
-            jobname.push($scope.schedules[index].names[j].name)
-
-        }
 
         var residentsWithFieldsChanged = []
 
@@ -976,8 +1037,8 @@ myApp.controller('myCtrl', function($scope, $filter) {
         // for each job ()
         for (let j = 0, job; j < $scope.jobs.length; j++) {
             // if the job of the result matches the requested job
-            for (let n = 0; n < jobname.length; n++) {
-                if ($scope.jobs[j].name == names[n]) {
+            for (let n = 0; n < $scope.schedules[index].names.length; n++) {
+                if ($scope.jobs[j].name == $scope.schedules[index].names[n].name) {
                     job = $scope.jobs[j];
                     jobs[job.id] = job;
                     job._id = job.id
@@ -998,7 +1059,10 @@ myApp.controller('myCtrl', function($scope, $filter) {
             return new Job(x._id,x._count,x._team,x._level,x._daytype,x._time)
         }
         )
-
+        // set the startdate, enddate, (and jobname(s)) from the schedule form
+        var startdate = new Date($scope.schedules[index].startDate);
+        var enddate = new Date($scope.schedules[index].endDate);
+        var jobname = $scope.schedules[index].jobName;
         // set the timeout for the scheduler
         var searchtime = 10
         // get results
@@ -1019,7 +1083,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
         var shiftStartTime2 = 17;
         var shiftStartTime3 = 5;
         var shiftStartTime4 = 17;
-
+        
         // for each job (j)
         for (let j = 0, job; j < results[1].jobs.length; j++) {
 
@@ -1067,7 +1131,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
                         // shift id
                         'id': s,
                         // job name
-                        'jobName': names[j],
+                        'jobName': $scope.schedules[index].names[j].name,
                         'jobLevel': ($scope.jobs[j].level).reverse(),
                         // assigned residents
                         'residents': assignedResidents.sort(),
