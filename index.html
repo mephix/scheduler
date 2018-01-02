@@ -112,7 +112,7 @@
                                         <td data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.pager}}</td>
                                         <td data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.email}}</td>
                                         <td data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.team}}</td>
-                                        <td class="align-middle responsive-lg text-right fit">
+                                        <td class="responsive-lg text-right fit">
                                             <button class="btn btn-outline-danger btn-sm fa fa-trash" ng-click="deleteResident(resident)"></button>
                                         </td>
                                     </tr>
@@ -145,17 +145,17 @@
                                                 <input class="form-control" id="editLevel" ng-model="residentFormLevel" placeholder=""/>
                                             </div>
                                             <div class="form-row">
-                                                <div class="form-group col-md-4">
+                                                <div class="form-group col-md-5">
                                                     <label class="text-muted small" for="pager">Pager</label>
                                                     <input class="form-control pager-format" id="editPager" ng-model="residentFormPager" placeholder=""/>
                                                 </div>
-                                                <div class="form-group col-md-8">
+                                                <div class="form-group col-md-7">
                                                     <label class="text-muted small" for="email">Email</label>
                                                     <input class="form-control" id="editEmail" ng-model="residentFormEmail" ng-change="checkEmail(editResidentId)" placeholder=""/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="text-muted small" for="team">Team</label>
+                                                <label class="text-muted small" for="team">Current Assignment</label>
                                                 <input class="form-control" id="editTeam" ng-model="residentFormTeam" placeholder=""/>
                                             </div>
                                         </div>
@@ -246,10 +246,10 @@
                                         <th data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.name}}</th>
                                         <td data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.dow}}</td>
                                         <td data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.tod}}</td>
-                                        <th data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.team}}</th>
-                                        <td data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.level}}</td>
+                                        <th data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)"><div ng-repeat="team in job.team">{{team}}</div></th>
+                                        <td data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)"><span ng-repeat="level in job.level">{{level}}{{$last ? '' : ', '}}</span></td>
                                         <td data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.count}}</td>
-                                        <td class="align-middle text-right fit responsive-lg">
+                                        <td class="text-right fit responsive-lg">
                                             <button class="btn btn-outline-danger btn-sm fa fa-trash" ng-click="deleteJob(job)"></button>
                                         </td>
                                     </tr>
@@ -281,22 +281,24 @@
                                                 <input class="form-control" id="editName" type="text" name="name" ng-model="jobFormName" placeholder="Edit job name" required="required"/>
                                             </div>
                                             <div class="form-row">
-                                                <div class="form-group col-md-5">
+                                                <div class="form-group col-md-6">
                                                     <label class="text-muted small" for="dow">Time of Day</label>
                                                     <input class="form-control" id="editDow" type="text" name="dow" ng-model="jobFormDow" placeholder="Edit day of week"/>
                                                 </div>
-                                                <div class="form-group col-7">
+                                                <div class="form-group col-md-6">
                                                     <label class="text-muted small" for="tod">Time of Day</label>
                                                     <input class="form-control" id="editTod" type="text" name="tod" ng-model="jobFormTod" placeholder="Edit time of day"/>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-row">
+                                            <div class="form-group col-md-8">
                                                 <label class="text-muted small" for="level">Level</label>
                                                 <input class="form-control" id="editLevel" type="text" name="level" ng-model="jobFormLevel" placeholder="Required level" required="required"/>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group col-md-4">
                                                 <label class="text-muted small" for="count">Count</label>
                                                 <input class="form-control" id="editCount" type="number" name="count" ng-model="jobFormCount" placeholder="Edit count"/>
+                                            </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -342,7 +344,7 @@
                                         </td>
                                         <td ng-click="showDetails = ! showDetails">{{schedule.startDate}}</td>
                                         <td ng-click="showDetails = ! showDetails">{{schedule.endDate}}</td>
-                                        <td class="align-middle text-right fit">
+                                        <td class="text-right fit">
                                             <button class="btn btn-outline-warning btn-sm fa fa-edit" data-toggle="modal" data-target="#scheduleModal" ng-click="editSchedule(schedule)"></button>
                                             <button class="btn btn-outline-danger btn-sm fa fa-trash" ng-click="deleteSchedule(schedule)"></button>
                                             <button class="btn btn-outline-success btn-sm fa fa-refresh" id="findSchedule-button" ng-click="findSchedule(schedule)"></button>
