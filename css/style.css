@@ -1,8 +1,19 @@
 /* === GLOBAL === */
+label {
+  padding-left: 15px;
+  text-indent: -15px;
+}
+input[type="checkbox"] {
+    top: -2px;
+}
+input[type="radio"] {
+    top: -2px;
+}
 
-.modal-open .ui-autocomplete {
+.modal-open {
     z-index: 9999;
 }
+
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: #f8f9fa;
@@ -12,6 +23,7 @@
     white-space: nowrap;
     width: 1%;
 }
+
 
 .modal-dialog {
     min-height: calc(100vh - 60px);
@@ -72,15 +84,15 @@
 }
 
 .resident:after {
-    background: #007aeb url("https://cbwconline.com/IMG/Codepen/Profile.svg") center no-repeat;
+    background: #007FFA url("https://cbwconline.com/IMG/Codepen/Profile.svg") center no-repeat;
 }
 
 .job:after {
-    background: #007aeb url("https://cbwconline.com/IMG/Codepen/Profile.svg") center no-repeat;
+    background: #007FFA url("https://cbwconline.com/IMG/Codepen/Profile.svg") center no-repeat;
 }
 
 .schedule:after {
-    background: #007aeb url("https://cbwconline.com/IMG/Codepen/Profile.svg") center no-repeat;
+    background: #007FFA url("https://cbwconline.com/IMG/Codepen/Profile.svg") center no-repeat;
 }
 
 .resident:after, .job:after, .schedule:after {

@@ -130,25 +130,74 @@ $(window).on('load', function() {
   $('.table-responsive').toggleClass('table-sm', $(window).width() < 768);
 */
 // datepicker
-$('.startdatepicker').datetimepicker({
-    format: 'mm/dd/yyyy',
-    minView: '2',
-    maxView: '3',
-    autoclose: true,
-    todayBtn: true,
-    todayHighlight: true,
-    fontAwesome: true,
-})
-$('.enddatepicker').datetimepicker({
-    format: 'mm/dd/yyyy',
-    minView: '2',
-    maxView: '3',
-    autoclose: true,
-    todayBtn: true,
-    todayHighlight: true,
-    fontAwesome: true,
-})
-$('.datepicker').datetimepicker('update', new Date())
+$(function () {
+    //default date range picker
+    $('#daterange').daterangepicker({
+        autoApply:true
+    });
+
+    //date time picker
+    $('#timepicker').daterangepicker({
+        timePicker: true,
+        datePicker: false,
+        timePickerIncrement: 60,
+        locale: {
+            format: 'MM/DD/YYYY h:mm A'
+        }
+    });
+
+    //single date
+    $('#date').daterangepicker({
+        singleDatePicker: false,
+    });
+});
+    /*$('.startdatepicker').datetimepicker({
+        format: 'mm/dd/yyyy',
+        minView: '2',
+        maxView: '3',
+        autoclose: true,
+        todayBtn: true,
+        todayHighlight: true,
+        fontAwesome: true,
+    });
+
+    $('.enddatepicker').datetimepicker({
+        format: 'mm/dd/yyyy',
+        minView: '2',
+        maxView: '3',
+        autoclose: true,
+        todayBtn: true,
+        todayHighlight: true,
+        fontAwesome: true,
+    });
+
+    $("#starttimepicker").datetimepicker({
+        formatViewType: 'time',
+        autoclose: true,
+        startView: 1,
+        
+        format: 'hh:ii'
+    }).on("show", function() {
+        $(".table-condensed .prev").css('visibility', 'hidden');
+        $(".table-condensed .switch").text("Select a Time");
+        $(".table-condensed .next").css('visibility', 'hidden');
+    });
+
+    $("#endtimepicker").datetimepicker({
+        formatViewType: 'time',
+        autoclose: true,
+        startView: 1,
+       
+        format: 'hh:ii'
+    }).on("show", function() {
+        $(".table-condensed .prev").css('visibility', 'hidden');
+        $(".table-condensed .switch").text("Select a Time");
+        $(".table-condensed .next").css('visibility', 'hidden');
+    });
+
+    $('.datetimepicker').datetimepicker('update', new Date())*/
+
+
 // pager number format
 $(".pager-format").keypress(function(e) {
     if (e.which != 8 && e.which !== 0 && (e.which < 48 || e.which > 57)) {
@@ -808,30 +857,30 @@ myApp.controller('myCtrl', function($scope, $filter) {
     $scope.schedules = [{
         id: 1,
         names: [{
-        id: 1,
-        team: ['AC Acute'],
-        name: 'AC Acute Chief',
-        dow: 'weekday',
-        tod: 'day',
-        level: ['5', '3'],
-        count: 1,
-    }, {
-        id: 2,
-        team: ['AC Acute'],
-        name: 'AC Acute Consult',
-        dow: 'weekday',
-        tod: 'day',
-        level: ['2', '3'],
-        count: 1,
-    }, {
-        id: 3,
-        team: ['AC Acute'],
-        name: 'AC Acute Floor',
-        dow: 'weekday',
-        tod: 'day',
-        level: ['1'],
-        count: 1,
-    }],
+            id: 1,
+            team: ['AC Acute'],
+            name: 'AC Acute Chief',
+            dow: 'weekday',
+            tod: 'day',
+            level: ['5', '3'],
+            count: 1,
+        }, {
+            id: 2,
+            team: ['AC Acute'],
+            name: 'AC Acute Consult',
+            dow: 'weekday',
+            tod: 'day',
+            level: ['2', '3'],
+            count: 1,
+        }, {
+            id: 3,
+            team: ['AC Acute'],
+            name: 'AC Acute Floor',
+            dow: 'weekday',
+            tod: 'day',
+            level: ['1'],
+            count: 1,
+        }],
         startDate: '12/25/2017',
         endDate: '01/22/2018',
         events: [{
@@ -848,34 +897,33 @@ myApp.controller('myCtrl', function($scope, $filter) {
                 'timeZone': 'America/Los_Angeles'
             }
         }]
-        },
-        {
+    }, {
         id: 2,
         names: [{
-        id: 6,
-        team: ['AC ES'],
-        name: 'AC ES Floor',
-        dow: 'weekday',
-        tod: 'day',
-        level: ['1'],
-        count: 1,
-    }, {
-        id: 7,
-        team: ['AC ES'],
-        name: 'AC ES Assist',
-        dow: 'weekday',
-        tod: 'day',
-        level: ['2', '3'],
-        count: 1,
-    }, {
-        id: 8,
-        team: ['AC ES'],
-        name: 'AC ES Chief',
-        dow: 'weekday',
-        tod: 'day',
-        level: ['5'],
-        count: 1,
-    }],
+            id: 6,
+            team: ['AC ES'],
+            name: 'AC ES Floor',
+            dow: 'weekday',
+            tod: 'day',
+            level: ['1'],
+            count: 1,
+        }, {
+            id: 7,
+            team: ['AC ES'],
+            name: 'AC ES Assist',
+            dow: 'weekday',
+            tod: 'day',
+            level: ['2', '3'],
+            count: 1,
+        }, {
+            id: 8,
+            team: ['AC ES'],
+            name: 'AC ES Chief',
+            dow: 'weekday',
+            tod: 'day',
+            level: ['5'],
+            count: 1,
+        }],
         startDate: '12/25/2017',
         endDate: '01/22/2018',
         events: [{
@@ -908,7 +956,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
 
         ///////////////
 
-         $scope.content = '';
+        $scope.content = '';
 
         $scope.isChecked = function(id) {
             var match = false;
@@ -924,15 +972,11 @@ myApp.controller('myCtrl', function($scope, $filter) {
 
         $scope.allOptions = $scope.jobs;
 
-
-
-
-
         $scope.sync = function(bool, item) {
             if (bool) {
                 // add item
                 $scope.scheduleFormNames.push(item);
-                
+
             } else {
                 // remove item
                 for (var i = 0; i < $scope.scheduleFormNames.length; i++) {
@@ -942,14 +986,12 @@ myApp.controller('myCtrl', function($scope, $filter) {
                 }
             }
         }
-        
+
         ///////////////
 
     }
     // save new or edited schedule form
     $scope.saveScheduleEdit = function(scheduleId) {
-
-       
 
         if (scheduleId == 'new') {
             var newSchedule = {
@@ -997,9 +1039,9 @@ myApp.controller('myCtrl', function($scope, $filter) {
 
     /* === SHOW CALENDARS === */
 
-// show schedule's events
+    // show schedule's events
     $scope.showCalendar = function(schedule) {
-       var index = $scope.schedules.indexOf(schedule);
+        var index = $scope.schedules.indexOf(schedule);
         $scope.triggerScheduleForm = true;
         $scope.editScheduleForm = true;
         $scope.addScheduleForm = false;
@@ -1008,7 +1050,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
         $scope.scheduleFormStartDate = $scope.schedules[index].startDate;
         $scope.scheduleFormEndDate = $scope.schedules[index].endDate;
     }
- 
+
     /* === CONVERT VARIABLES === */
     // JP's code runs outside of angular, 
     // which means the angular variables need to be converted
@@ -1078,12 +1120,13 @@ myApp.controller('myCtrl', function($scope, $filter) {
 
         // allow the user to set the shift length in hours
         var shiftLength = 12;
+
         // allow the user to set the shift start hour
         var shiftStartTime1 = 5;
         var shiftStartTime2 = 17;
         var shiftStartTime3 = 5;
         var shiftStartTime4 = 17;
-        
+
         // for each job (j)
         for (let j = 0, job; j < results[1].jobs.length; j++) {
 

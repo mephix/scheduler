@@ -1,18 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
         <title>Denali</title>
         <!-- bootstrap core css -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://rawgit.com/AuspeXeu/bootstrap-datetimepicker/master/css/bootstrap-datetimepicker.css">
         <!-- custom css styles -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="css/daterangepicker.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
         <!--### NAVIGATION ###-->
@@ -39,7 +39,17 @@
         <div class="container">
             <div class="col-lg-12">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <span>This is where I'll put some instructions.</span>
+                    <span>
+                        <i class="fas fa-info-circle mr-2"></i>
+                        This is where I'll put some instructions.
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    </span>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -60,13 +70,13 @@
                         </div>
                         <!-- search table -->
                         <form>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-search"></i>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Filter..." ng-model="searchResident">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fas fa-search"></i>
+                                    </span>
                                 </div>
+                                <input type="text" class="form-control" placeholder="Filter..." ng-model="searchResident">
                             </div>
                         </form>
                         <!-- content table -->
@@ -75,45 +85,127 @@
                                 <thead class="thead">
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-                                            Name <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                                            Name 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'name' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'name' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'level'; sortReverse = !sortReverse">
-                                            Level <span ng-show="sortType == 'level' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'level' && sortReverse" class="fa fa-caret-up"></span>
+                                            Level 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'level' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'level' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'pager'; sortReverse = !sortReverse">
-                                            Pager <span ng-show="sortType == 'pager' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'pager' && sortReverse" class="fa fa-caret-up"></span>
+                                            Pager 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'pager' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'pager' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'email'; sortReverse = !sortReverse">
-                                            Email <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+                                            Email 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'email' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'email' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'team'; sortReverse = !sortReverse">
-                                            Current Assignment <span ng-show="sortType == 'team' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'team' && sortReverse" class="fa fa-caret-up"></span>
+                                            Current Assignment 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'team' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'team' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0 fit responsive-lg"></th>
                                 </thead>
                                 <tbody class="text">
                                     <tr ng-repeat="resident in residents | orderBy:['-level','name'] | orderBy:sortType:sortReverse | filter:searchResident">
-                                        <th data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.name}}</th>
+                                        <td data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.name}}</td>
                                         <td data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.level}} </td>
                                         <td data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.pager}}</td>
                                         <td data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.email}}</td>
                                         <td data-toggle="modal" data-target="#residentModal" ng-click="editResident(resident)">{{resident.team}}</td>
                                         <td class="responsive-lg text-right fit">
-                                            <button class="btn btn-outline-danger btn-sm fa fa-trash" ng-click="deleteResident(resident)"></button>
+                                            <button class="btn btn-outline-secondary btn-sm" ng-click="deleteResident(resident)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -162,7 +254,7 @@
                                         <!-- ./edit modal body -->
                                         <!-- edit modal footer -->
                                         <div class="modal-footer">
-                                            <button class="btn btn-outline-danger" ng-click="deleteResident(resident)" data-dismiss="modal">Delete</button>
+                                            <button class="btn btn-outline-secondary" data-dismiss="modal" aria-label="Close" ng-click="triggerScheduleForm = false">Cancel</button>
                                             <button class="btn btn-primary" ng-click="saveResidentEdit(editResidentId)" ng-disabled="residentForm.$invalid || emailExisted" data-dismiss="modal">Save</button>
                                         </div>
                                         <!-- ./edit modal footer -->
@@ -190,13 +282,13 @@
                         </div>
                         <!-- search table -->
                         <form>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-search"></i>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Filter..." ng-model="searchJob">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fas fa-search"></i>
+                                    </span>
                                 </div>
+                                <input type="text" class="form-control" placeholder="Filter..." ng-model="searchJob">
                             </div>
                         </form>
                         <!-- content table -->
@@ -205,52 +297,154 @@
                                 <thead class="thead">
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
-                                            Job <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                                            Job 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'name' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'name' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'dow'; sortReverse = !sortReverse">
-                                            Days <span ng-show="sortType == 'dow' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'dow' && sortReverse" class="fa fa-caret-up"></span>
+                                            Days 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'dow' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'dow' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'tod'; sortReverse = !sortReverse">
-                                            Time <span ng-show="sortType == 'tod' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'tod' && sortReverse" class="fa fa-caret-up"></span>
+                                            Time 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'tod' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'tod' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'team'; sortReverse = !sortReverse">
-                                            Covering Team(s) <span ng-show="sortType == 'team' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'team' && sortReverse" class="fa fa-caret-up"></span>
+                                            Covering Team(s) 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'team' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'team' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'level'; sortReverse = !sortReverse">
-                                            Required Level(s) <span ng-show="sortType == 'level' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'level' && sortReverse" class="fa fa-caret-up"></span>
+                                            Required Level(s) 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'level' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'level' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'count'; sortReverse = !sortReverse">
-                                            Required Count <span ng-show="sortType == 'count' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'count' && sortReverse" class="fa fa-caret-up"></span>
+                                            Required Count 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'count' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'count' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0 fit responsive-lg "></th>
                                 </thead>
                                 <tbody class="text">
                                     <tr ng-repeat="job in jobs | orderBy:['dow','tod','team','-level'] | orderBy:sortType:sortReverse | filter:searchJob">
-                                        <th data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.name}}</th>
+                                        <td data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.name}}</td>
                                         <td data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.dow}}</td>
                                         <td data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.tod}}</td>
-                                        <th data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)"><div ng-repeat="team in job.team">{{team}}</div></th>
-                                        <td data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)"><span ng-repeat="level in job.level">{{level}}{{$last ? '' : ', '}}</span></td>
+                                        <td data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">
+                                            <div ng-repeat="team in job.team">{{team}}</div>
+                                        </td>
+                                        <td data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">
+                                            <span ng-repeat="level in job.level">{{level}}{{$last ? '' : ', '}}</span>
+                                        </td>
                                         <td data-toggle="modal" data-target="#jobModal" ng-click="editJob(job)">{{job.count}}</td>
                                         <td class="text-right fit responsive-lg">
-                                            <button class="btn btn-outline-danger btn-sm fa fa-trash" ng-click="deleteJob(job)"></button>
+                                            <button class="btn btn-outline-secondary btn-sm" ng-click="deleteJob(job)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -282,27 +476,34 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <label class="text-muted small" for="dow">Time of Day</label>
-                                                    <input class="form-control" id="editDow" type="text" name="dow" ng-model="jobFormDow" placeholder="Edit day of week"/>
+                                                    <label class="text-muted small">Day of Week</label>
+                                                    <select class="form-control" name="dow" id="editDow" ng-model="jobFormDow">
+                                                        <option value="weekday">Weekdays</option>
+                                                        <option value="weekend">Weekends</option>
+                                                    </select>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label class="text-muted small" for="tod">Time of Day</label>
-                                                    <input class="form-control" id="editTod" type="text" name="tod" ng-model="jobFormTod" placeholder="Edit time of day"/>
+                                                <div class="form-group col-md-3">
+                                                    <label class="text-muted small" for="editTod1">Start Time</label>
+                                                    <input class="form-control " id="starttimepicker" type="text" name="tod">
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label class="text-muted small" for="editTod2">End Time</label>
+                                                    <input class="form-control " id="endtimepicker" type="text" name="tod">
                                                 </div>
                                             </div>
                                             <div class="form-row">
-                                            <div class="form-group col-md-8">
-                                                <label class="text-muted small" for="level">Level</label>
-                                                <input class="form-control" id="editLevel" type="text" name="level" ng-model="jobFormLevel" placeholder="Required level" required="required"/>
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <label class="text-muted small" for="count">Count</label>
-                                                <input class="form-control" id="editCount" type="number" name="count" ng-model="jobFormCount" placeholder="Edit count"/>
-                                            </div>
+                                                <div class="form-group col-md-9">
+                                                    <label class="text-muted small" for="level">Required Level(s)</label>
+                                                    <input class="form-control" id="editLevel" type="text" name="level" ng-model="jobFormLevel" placeholder="Required level" required="required"/>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label class="text-muted small" for="count">Count (optional)</label>
+                                                    <input class="form-control" id="editCount" type="number" name="count" ng-model="jobFormCount" placeholder="Edit count"/>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-danger" ng-click="deleteJob(job)" data-dismiss="modal">Delete</button>
+                                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" aria-label="Close" ng-click="triggerScheduleForm = false">Cancel</button>
                                             <button class="btn btn-primary" ng-click="saveJobEdit(editJobId)" ng-disabled="jobForm.$invalid" data-dismiss="modal">Save</button>
                                         </div>
                                         <!-- ./edit modal footer -->
@@ -345,9 +546,12 @@
                                         <td ng-click="showDetails = ! showDetails">{{schedule.startDate}}</td>
                                         <td ng-click="showDetails = ! showDetails">{{schedule.endDate}}</td>
                                         <td class="text-right fit">
-                                            <button class="btn btn-outline-warning btn-sm fa fa-edit" data-toggle="modal" data-target="#scheduleModal" ng-click="editSchedule(schedule)"></button>
-                                            <button class="btn btn-outline-danger btn-sm fa fa-trash" ng-click="deleteSchedule(schedule)"></button>
-                                            <button class="btn btn-outline-success btn-sm fa fa-refresh" id="findSchedule-button" ng-click="findSchedule(schedule)"></button>
+                                            <button class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#scheduleModal" ng-click="editSchedule(schedule)">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-outline-secondary btn-sm" ng-click="deleteSchedule(schedule)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -357,41 +561,84 @@
                                                 <div class="card-body">
                                                     <!-- results -->
                                                     <div class="calendar-table">
-                                                        <input type="text" class="form-control mb-4" placeholder="Filter..." ng-model="searchEvent">
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <i class="fas fa-search"></i>
+                                                                </span>
+                                                            </div>
+                                                            <input type="text" class="form-control" placeholder="Filter..." ng-model="searchEvent">
+                                                        </div>
                                                         <table class="table table-sm bg-transparent">
                                                             <thead class="thead">
                                                                 <th class="border-top-0">
                                                                     <a href="#" ng-click="sortType = 'jobName'; sortReverse = !sortReverse">
-                                                                        Job <span ng-show="sortType == 'jobName' && !sortReverse" class="fa fa-caret-down"></span>
-                                                                        <span ng-show="sortType == 'jobName' && sortReverse" class="fa fa-caret-up"></span>
+                                                                        Job 
+                                                                        
+                                                                        
+                                                                        
+                                                                        <span ng-show="sortType == 'jobName' && !sortReverse">
+                                                                            <i class="fas fa-caret-down"></i>
+                                                                        </span>
+                                                                        <span ng-show="sortType == 'jobName' && sortReverse">
+                                                                            <i class="fas fa-caret-up"></i>
+                                                                        </span>
                                                                     </a>
                                                                 </th>
                                                                 <th class="border-top-0">
                                                                     <a href="#" ng-click="sortType = 'residents'; sortReverse = !sortReverse">
-                                                                        Residents <span ng-show="sortType == 'residents' && !sortReverse" class="fa fa-caret-down"></span>
-                                                                        <span ng-show="sortType == 'residents' && sortReverse" class="fa fa-caret-up"></span>
+                                                                        Residents 
+                                                                        
+                                                                        
+                                                                        
+                                                                        <span ng-show="sortType == 'residents' && !sortReverse">
+                                                                            <i class="fas fa-caret-down"></i>
+                                                                        </span>
+                                                                        <span ng-show="sortType == 'residents' && sortReverse">
+                                                                            <i class="fas fa-caret-up"></i>
+                                                                        </span>
                                                                     </a>
                                                                 </th>
                                                                 <th class="border-top-0">
                                                                     <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                                                        Shift Start <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
-                                                                        <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+                                                                        Shift Start 
+                                                                        
+                                                                        
+                                                                        
+                                                                        <span ng-show="sortType == 'id' && !sortReverse">
+                                                                            <i class="fas fa-caret-down"></i>
+                                                                        </span>
+                                                                        <span ng-show="sortType == 'id' && sortReverse">
+                                                                            <i class="fas fa-caret-up"></i>
+                                                                        </span>
                                                                     </a>
                                                                 </th>
                                                                 <th class="border-top-0">
                                                                     <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                                                        Shift End <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
-                                                                        <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+                                                                        Shift End 
+                                                                        
+                                                                        
+                                                                        
+                                                                        <span ng-show="sortType == 'id' && !sortReverse">
+                                                                            <i class="fas fa-caret-down"></i>
+                                                                        </span>
+                                                                        <span ng-show="sortType == 'id' && sortReverse">
+                                                                            <i class="fas fa-caret-up"></i>
+                                                                        </span>
                                                                     </a>
                                                                 </th>
                                                                 <th class="border-top-0 text-right">
-                                                                    <button class="btn btn-outline-success btn-sm fa fa-refresh" id="findSchedule-button" ng-click="findSchedule(schedule)"></button>
+                                                                    <button class="btn btn-outline-primary btn-sm" id="findSchedule-button" ng-click="findSchedule(schedule)">
+                                                                        <i class="fas fa-magic"></i>
+                                                                    </button>
                                                                 </th>
                                                             </thead>
                                                             <tbody>
                                                                 <tr ng-repeat="event in schedule.events | orderBy:['-id','-level'] | orderBy:sortType:!sortReverse | filter:searchEvent">
                                                                     <td>{{event.jobName}}</td>
-                                                                    <td><div ng-repeat="resident in event.residents">{{resident}}</div></td>
+                                                                    <td>
+                                                                        <div ng-repeat="resident in event.residents">{{resident}}</div>
+                                                                    </td>
                                                                     <td>{{event.start.dateTime}}</td>
                                                                     <td>{{event.end.dateTime}}</td>
                                                                     <td class="fit"></td>
@@ -421,24 +668,34 @@
                                         <!-- ./edit modal header -->
                                         <!-- edit modal body -->
                                         <div class="modal-body">
-                                            <div class="form-group">
-                                                <label class="text-muted small" for="names">Job Names</label>
-                                                <p ng-repeat="item in allOptions" ng-model="scheduleFormNames">
-                                                    <input type="checkbox" ng-click="sync(bool, item)" ng-model="bool" ng-checked="isChecked(item.id)"> {{item.name}}
-                                            </div>
                                             <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label class="text-muted small" for="startDate">Start Date</label>
-                                                    <input class="form-control enddatepicker" id="editStartDate" type="text" name="startDate" ng-model="scheduleFormStartDate" placeholder="Specify start date"/>
+                                                <div class="form-group col-md-12">
+                                                    <label class="text-muted small" for="startDate">Date Range</label>
+                                                    
+                                                        <input type="text" class="form-control" id="daterange" placeholder="Select value">
+                                                    
+                                                    <!--input class="form-control enddatepicker" id="editStartDate" type="text" name="startDate" ng-model="scheduleFormStartDate"/-->
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <!--div class="form-group col-md-6">
                                                     <label class="text-muted small" for="endDate">End Date</label>
-                                                    <input class="form-control startdatepicker" id="editEndDate" type="text" name="endDate" ng-model="scheduleFormEndDate" placeholder="Edit end date"/>
-                                                </div>
+                                                    <input class="form-control startdatepicker" id="editEndDate" type="text" name="endDate" ng-model="scheduleFormEndDate"/>
+                                                </div-->
                                             </div>
+                                            <label class="text-muted small" for="names">Job Names</label>
+                                            <div class="form-check" ng-repeat="item in allOptions" ng-model="scheduleFormNames">
+                                                <input type="checkbox" class="form-check-input" ng-click="sync(bool, item)" ng-model="bool" ng-checked="isChecked(item.id)">
+                                                <label class="form-check-label">{{item.name}}</label>
+                                            </div>
+                                            <!--div class="form-group">
+                                                <label class="text-muted small" for="names">Job Names</label>
+                                                <div ng-repeat="item in allOptions" ng-model="scheduleFormNames">
+                                                    <input class="form-control" type="checkbox" ng-click="sync(bool, item)" ng-model="bool" ng-checked="isChecked(item.id)">
+                                                    <label>{{item.name}}</label>
+                                                </div>
+                                            </div-->
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-danger" ng-click="deleteSchedule(schedule)" data-dismiss="modal">Delete</button>
+                                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" aria-label="Close" ng-click="triggerScheduleForm = false">Cancel</button>
                                             <button class="btn btn-primary" ng-click="saveScheduleEdit(editScheduleId)" ng-disabled="scheduleForm.$invalid" data-dismiss="modal">Save</button>
                                         </div>
                                         <!-- ./edit modal footer -->
@@ -465,12 +722,27 @@
                         <!-- ./fab -->
                         <!-- search table -->
                         <form>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <button class="btn btn-primary input-group-addon fa fa-caret-left" ng-click="decrement()"></button>
-                                    <button class="btn btn-primary input-group-addon" ng-click="today()">Today</button>
-                                    <button class="btn btn-primary input-group-addon fa fa-caret-right" ng-click="increment()"></button>
-                                    <input type="text" class="form-control" placeholder="Filter..." ng-model="searchEvent">
+                            <div class="form-row">
+                                <div class="form-group col-md-10">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fas fa-search"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Filter..." ng-model="searchEvent">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <div class="btn-group">
+                                        <button class="btn btn-outline-secondary" ng-click="decrement()">
+                                            <i class="fas fa-angle-left"></i>
+                                        </button>
+                                        <button class="btn btn-outline-secondary" ng-click="today()">Today</button>
+                                        <button class="btn btn-outline-secondary" ng-click="increment()">
+                                            <i class="fas fa-angle-right"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -480,26 +752,74 @@
                                 <thead class="thead">
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'jobName'; sortReverse = !sortReverse">
-                                            Job <span ng-show="sortType == 'jobName' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'jobName' && sortReverse" class="fa fa-caret-up"></span>
+                                            Job 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'jobName' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'jobName' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'residents'; sortReverse = !sortReverse">
-                                            Residents <span ng-show="sortType == 'residents' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'residents' && sortReverse" class="fa fa-caret-up"></span>
+                                            Residents 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'residents' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'residents' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                            Shift Start <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+                                            Shift Start 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'id' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'id' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                     <th class="border-top-0">
                                         <a href="#" ng-click="sortType = 'id'; sortReverse = !sortReverse">
-                                            Shift End <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
-                                            <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+                                            Shift End 
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <span ng-show="sortType == 'id' && !sortReverse">
+                                                <i class="fas fa-caret-down"></i>
+                                            </span>
+                                            <span ng-show="sortType == 'id' && sortReverse">
+                                                <i class="fas fa-caret-up"></i>
+                                            </span>
                                         </a>
                                     </th>
                                 </thead>
@@ -507,7 +827,9 @@
                                 <tbody ng-repeat="schedule in schedules">
                                     <tr ng-repeat="event in schedule.events | orderBy:['-id','-level'] | orderBy:sortType:!sortReverse | filter:viewDate | filter:searchEvent">
                                         <td>{{event.jobName}}</td>
-                                        <td><div ng-repeat="resident in event.residents">{{resident}}</div></td>
+                                        <td>
+                                            <div ng-repeat="resident in event.residents">{{resident}}</div>
+                                        </td>
                                         <td class="fit">{{event.start.dateTime}}</td>
                                         <td class="fit">{{event.end.dateTime}}</td>
                                     </tr>
@@ -537,10 +859,62 @@
                                     
                                     
                                     
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                     </p>
                                     <p class="card-text">
                                         <small class="text-muted bottom mr-2">Team</small>
                                         {{resident.team}}
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                     
                                     
                                     
@@ -561,10 +935,62 @@
                                     
                                     
                                     
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                     </p>
                                     <p class="card-text">
                                         <small class="text-muted bottom mr-2">Email</small>
                                         {{resident.email}}
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                     
                                     
                                     
@@ -588,14 +1014,15 @@
         <!-- ./content container -->
         <!--### JAVASCRIPTS ###-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.17.0/math.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/AuspeXeu/bootstrap-datetimepicker/master/js/bootstrap-datetimepicker.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://rawgit.com/AuspeXeu/bootstrap-datetimepicker/master/js/bootstrap-datetimepicker.js"></script>
         <!--script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script-->
-        <script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript" src="js/daterangepicker.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
     </body>
 </html>
