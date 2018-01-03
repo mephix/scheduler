@@ -130,28 +130,8 @@ $(window).on('load', function() {
   $('.table-responsive').toggleClass('table-sm', $(window).width() < 768);
 */
 // datepicker
-$(function () {
-    //default date range picker
-    $('#daterange').daterangepicker({
-        autoApply:true
-    });
 
-    //date time picker
-    $('#timepicker').daterangepicker({
-        timePicker: true,
-        datePicker: false,
-        timePickerIncrement: 60,
-        locale: {
-            format: 'MM/DD/YYYY h:mm A'
-        }
-    });
-
-    //single date
-    $('#date').daterangepicker({
-        singleDatePicker: false,
-    });
-});
-    /*$('.startdatepicker').datetimepicker({
+/*$('.startdatepicker').datetimepicker({
         format: 'mm/dd/yyyy',
         minView: '2',
         maxView: '3',
@@ -196,7 +176,6 @@ $(function () {
     });
 
     $('.datetimepicker').datetimepicker('update', new Date())*/
-
 
 // pager number format
 $(".pager-format").keypress(function(e) {
@@ -676,7 +655,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 14,
         team: ['AC Acute'],
-        name: 'AC Call Consult',
+        name: 'AC Weekday Night Consult',
         dow: 'weekday',
         tod: 'night',
         level: ['2', '3'],
@@ -684,7 +663,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 15,
         team: ['AC Acute'],
-        name: 'AC Call Floor',
+        name: 'AC Weekday Night Floor',
         dow: 'weekday',
         tod: 'night',
         level: ['1'],
@@ -692,7 +671,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 16,
         team: ['AC SICU'],
-        name: 'AC Call SICU',
+        name: 'AC Weekday Night SICU',
         dow: 'weekday',
         tod: 'night',
         level: ['1'],
@@ -700,7 +679,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 17,
         team: ['AC Trauma'],
-        name: 'AC Call Trauma',
+        name: 'AC Weekday Night Trauma',
         dow: 'weekday',
         tod: 'night',
         level: ['1', '2'],
@@ -708,7 +687,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 18,
         team: ['AC Acute', 'AC Trauma'],
-        name: 'AC Call Chief',
+        name: 'AC Weekend Night Chief',
         dow: 'weekend',
         tod: 'night',
         level: ['4', '5'],
@@ -716,7 +695,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 19,
         team: ['AC Acute', 'AC ES2'],
-        name: 'AC Call Consult',
+        name: 'AC Weekend Night Consult',
         dow: 'weekend',
         tod: 'night',
         level: ['2', '3'],
@@ -724,7 +703,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 20,
         team: ['AC Acute', 'AC Trauma', 'AC ES', 'AC Blue'],
-        name: 'AC Call Floor',
+        name: 'AC Weekend Night Floor',
         dow: 'weekend',
         tod: 'night',
         level: ['1'],
@@ -732,7 +711,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 21,
         team: ['AC SICU'],
-        name: 'AC Call SICU',
+        name: 'AC Weekend Night SICU',
         dow: 'weekend',
         tod: 'night',
         level: ['1'],
@@ -740,7 +719,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 22,
         team: ['AC Trauma'],
-        name: 'AC Call Trauma',
+        name: 'AC Weekend Night Trauma',
         dow: 'weekend',
         tod: 'night',
         level: ['1', '2', '3'],
@@ -748,7 +727,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 23,
         team: ['AC Acute', 'AC Trauma'],
-        name: 'AC Call Chief',
+        name: 'AC Weekend Day Chief',
         dow: 'weekend',
         tod: 'day',
         level: ['4', '5'],
@@ -756,7 +735,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 24,
         team: ['AC Acute', 'AC Trauma', 'AC ES2', 'AC Blue'],
-        name: 'AC Call Consult',
+        name: 'AC Weekend Day Consult',
         dow: 'weekend',
         tod: 'day',
         level: ['2', '3'],
@@ -764,7 +743,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 25,
         team: ['AC Acute', 'AC Trauma', 'AC ES', 'AC Blue'],
-        name: 'AC Call Floor',
+        name: 'AC Weekend Day Floor',
         dow: 'weekend',
         tod: 'day',
         level: ['1'],
@@ -772,7 +751,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 26,
         team: ['AC SICU'],
-        name: 'AC Call SICU',
+        name: 'AC Weekend Day SICU',
         dow: 'weekend',
         tod: 'day',
         level: ['1'],
@@ -780,7 +759,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 27,
         team: ['AC Trauma'],
-        name: 'AC Call Trauma',
+        name: 'AC Weekend Day Trauma',
         dow: 'weekend',
         tod: 'day',
         level: ['1', '2', '3'],
@@ -885,15 +864,15 @@ myApp.controller('myCtrl', function($scope, $filter) {
         endDate: '01/22/2018',
         events: [{
             'id': 'id',
-            'jobName': 'jobname',
-            'jobLevel': 'joblevel',
-            'residents': 'residents',
+            'jobName': '',
+            'jobLevel': '',
+            'residents': '',
             'start': {
-                'dateTime': 'startdatetime',
+                'dateTime': '',
                 'timeZone': 'America/Los_Angeles'
             },
             'end': {
-                'dateTime': 'enddatetime',
+                'dateTime': '',
                 'timeZone': 'America/Los_Angeles'
             }
         }]
@@ -927,16 +906,16 @@ myApp.controller('myCtrl', function($scope, $filter) {
         startDate: '12/25/2017',
         endDate: '01/22/2018',
         events: [{
-            'id': 'id',
-            'jobName': 'jobname2',
-            'jobLevel': 'joblevel2',
-            'residents': 'residents2',
+            'id': '',
+            'jobName': '',
+            'jobLevel': '',
+            'residents': '',
             'start': {
-                'dateTime': 'startdatetime2',
+                'dateTime': '',
                 'timeZone': 'America/Los_Angeles'
             },
             'end': {
-                'dateTime': 'enddatetime2',
+                'dateTime': '',
                 'timeZone': 'America/Los_Angeles'
             }
         }]
@@ -953,6 +932,15 @@ myApp.controller('myCtrl', function($scope, $filter) {
         $scope.scheduleFormStartDate = $scope.schedules[index].startDate;
         $scope.scheduleFormEndDate = $scope.schedules[index].endDate;
         $scope.scheduleFormEvents = $scope.schedules[index].events;
+
+        // datepicker
+
+        //default date range picker
+        $('.daterange').daterangepicker({
+            autoApply: true,
+            startDate: $scope.scheduleFormStartDate,
+            endDate: $scope.scheduleFormEndDate
+        });
 
         ///////////////
 
@@ -993,6 +981,13 @@ myApp.controller('myCtrl', function($scope, $filter) {
     // save new or edited schedule form
     $scope.saveScheduleEdit = function(scheduleId) {
 
+        
+        var dateRange = $('.daterange').val();
+        $scope.scheduleFormStartDate = dateRange.replace(/(.*?) .*/i,'$1');
+        $scope.scheduleFormEndDate = dateRange.replace(/.*? - (.*)/i,'$1');
+
+
+
         if (scheduleId == 'new') {
             var newSchedule = {
                 names: $scope.scheduleFormNames,
@@ -1004,8 +999,10 @@ myApp.controller('myCtrl', function($scope, $filter) {
             $scope.schedules.push(newSchedule);
         } else {
             $scope.schedules[scheduleId].names = $scope.scheduleFormNames;
-            $scope.schedules[scheduleId].startDate = $scope.scheduleFormStartDate;
-            $scope.schedules[scheduleId].endDate = $scope.scheduleFormEndDate;
+            var dateRange = $('.daterange').val();
+        $scope.schedules[scheduleId].startDate = dateRange.replace(/(.*?) .*/i,'$1');
+        $scope.schedules[scheduleId].endDate = dateRange.replace(/.*? - (.*)/i,'$1');
+
             $scope.schedules[scheduleId].events = $scope.scheduleFormEvents;
 
         }
