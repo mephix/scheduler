@@ -704,7 +704,7 @@
                 html += '<th></th>';
 
             if ((!minDate || minDate.isBefore(calendar.firstDay)) && (!this.linkedCalendars || side == 'left')) {
-                html += '<th class="next available"><i class="fas fa-angle-' + arrow.left + '"></i></th>';
+                html += '<th class="prev available"><i class="fas fa-angle-' + arrow.left + '"></i></th>';
             } else {
                 html += '<th></th>';
             }

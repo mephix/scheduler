@@ -58,6 +58,7 @@ function handleSignoutClick(event) {
 /* ====================== */
 /* ### FRONT END ### */
 /* ====================== */
+
 // scroll to top
 function scrollToTop() {
     window.scrollTo(0, 0);
@@ -195,6 +196,21 @@ $(".pager-format").keypress(function(e) {
         $(this).attr('maxlength', '14');
     }
 });
+
+//date range
+$('.daterange').daterangepicker({
+    autoApply: true,
+
+});
+
+//single date
+
+$('#calendarDateRange').daterangepicker({
+    autoApply: true,
+    opens: 'left',
+
+});
+
 initResponsiveTables();
 
 /* ====================== */
@@ -647,7 +663,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 13,
         team: ['AC Trauma'],
-        name: 'AC Call Chief',
+        name: 'AC Weekday Night Call Chief',
         dow: 'weekday',
         tod: 'night',
         level: ['4', '5'],
@@ -655,7 +671,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 14,
         team: ['AC Acute'],
-        name: 'AC Weekday Night Consult',
+        name: 'AC Weekday Night Call Consult',
         dow: 'weekday',
         tod: 'night',
         level: ['2', '3'],
@@ -663,7 +679,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 15,
         team: ['AC Acute'],
-        name: 'AC Weekday Night Floor',
+        name: 'AC Weekday Night Call Floor',
         dow: 'weekday',
         tod: 'night',
         level: ['1'],
@@ -671,7 +687,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 16,
         team: ['AC SICU'],
-        name: 'AC Weekday Night SICU',
+        name: 'AC Weekday Night Call SICU',
         dow: 'weekday',
         tod: 'night',
         level: ['1'],
@@ -679,7 +695,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 17,
         team: ['AC Trauma'],
-        name: 'AC Weekday Night Trauma',
+        name: 'AC Weekday Night Call Trauma',
         dow: 'weekday',
         tod: 'night',
         level: ['1', '2'],
@@ -687,7 +703,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 18,
         team: ['AC Acute', 'AC Trauma'],
-        name: 'AC Weekend Night Chief',
+        name: 'AC Weekend Night Call Chief',
         dow: 'weekend',
         tod: 'night',
         level: ['4', '5'],
@@ -695,7 +711,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 19,
         team: ['AC Acute', 'AC ES2'],
-        name: 'AC Weekend Night Consult',
+        name: 'AC Weekend Night Call Consult',
         dow: 'weekend',
         tod: 'night',
         level: ['2', '3'],
@@ -703,7 +719,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 20,
         team: ['AC Acute', 'AC Trauma', 'AC ES', 'AC Blue'],
-        name: 'AC Weekend Night Floor',
+        name: 'AC Weekend Night Call Floor',
         dow: 'weekend',
         tod: 'night',
         level: ['1'],
@@ -711,7 +727,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 21,
         team: ['AC SICU'],
-        name: 'AC Weekend Night SICU',
+        name: 'AC Weekend Night Call SICU',
         dow: 'weekend',
         tod: 'night',
         level: ['1'],
@@ -719,7 +735,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 22,
         team: ['AC Trauma'],
-        name: 'AC Weekend Night Trauma',
+        name: 'AC Weekend Night Call Trauma',
         dow: 'weekend',
         tod: 'night',
         level: ['1', '2', '3'],
@@ -727,7 +743,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 23,
         team: ['AC Acute', 'AC Trauma'],
-        name: 'AC Weekend Day Chief',
+        name: 'AC Weekend Day Call Chief',
         dow: 'weekend',
         tod: 'day',
         level: ['4', '5'],
@@ -735,7 +751,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 24,
         team: ['AC Acute', 'AC Trauma', 'AC ES2', 'AC Blue'],
-        name: 'AC Weekend Day Consult',
+        name: 'AC Weekend Day Call Consult',
         dow: 'weekend',
         tod: 'day',
         level: ['2', '3'],
@@ -743,7 +759,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 25,
         team: ['AC Acute', 'AC Trauma', 'AC ES', 'AC Blue'],
-        name: 'AC Weekend Day Floor',
+        name: 'AC Weekend Day Call Floor',
         dow: 'weekend',
         tod: 'day',
         level: ['1'],
@@ -751,7 +767,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 26,
         team: ['AC SICU'],
-        name: 'AC Weekend Day SICU',
+        name: 'AC Weekend Day Call SICU',
         dow: 'weekend',
         tod: 'day',
         level: ['1'],
@@ -759,7 +775,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
     }, {
         id: 27,
         team: ['AC Trauma'],
-        name: 'AC Weekend Day Trauma',
+        name: 'AC Weekend Day Call Trauma',
         dow: 'weekend',
         tod: 'day',
         level: ['1', '2', '3'],
@@ -981,12 +997,9 @@ myApp.controller('myCtrl', function($scope, $filter) {
     // save new or edited schedule form
     $scope.saveScheduleEdit = function(scheduleId) {
 
-        
         var dateRange = $('.daterange').val();
-        $scope.scheduleFormStartDate = dateRange.replace(/(.*?) .*/i,'$1');
-        $scope.scheduleFormEndDate = dateRange.replace(/.*? - (.*)/i,'$1');
-
-
+        $scope.scheduleFormStartDate = dateRange.replace(/(.*?) .*/i, '$1');
+        $scope.scheduleFormEndDate = dateRange.replace(/.*? - (.*)/i, '$1');
 
         if (scheduleId == 'new') {
             var newSchedule = {
@@ -1000,8 +1013,8 @@ myApp.controller('myCtrl', function($scope, $filter) {
         } else {
             $scope.schedules[scheduleId].names = $scope.scheduleFormNames;
             var dateRange = $('.daterange').val();
-        $scope.schedules[scheduleId].startDate = dateRange.replace(/(.*?) .*/i,'$1');
-        $scope.schedules[scheduleId].endDate = dateRange.replace(/.*? - (.*)/i,'$1');
+            $scope.schedules[scheduleId].startDate = dateRange.replace(/(.*?) .*/i, '$1');
+            $scope.schedules[scheduleId].endDate = dateRange.replace(/.*? - (.*)/i, '$1');
 
             $scope.schedules[scheduleId].events = $scope.scheduleFormEvents;
 
@@ -1211,6 +1224,22 @@ myApp.controller('myCtrl', function($scope, $filter) {
         $scope.viewDate = moment($scope.viewDate, "ddd, DD MMM YYYY").subtract(1, "day").format("ddd, DD MMM YYYY");
         $scope.viewDateLong = moment($scope.viewDate, "ddd, DD MMM YYYY").format("dddd, MMMM Do YYYY")
     }
+   
+
+    $scope.isActive = false;
+
+    $scope.activeButton = function() {
+        $scope.isActive = !$scope.isActive;
+    }
+     $scope.showDetails = function(schedule) {
+        if ($scope.isActive == true) {
+            $scope.selectedSchedule = schedule;
+        } else {
+            $scope.selectedSchedule = null;
+        }
+
+    }
+
 })
 
 /* ====================== */
