@@ -878,6 +878,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
         }],
         startDate: '12/25/2017',
         endDate: '01/22/2018',
+        statistics: [],
         events: [{
             'id': 'id',
             'jobName': '',
@@ -921,6 +922,7 @@ myApp.controller('myCtrl', function($scope, $filter) {
         }],
         startDate: '12/25/2017',
         endDate: '01/22/2018',
+        statistics: [],
         events: [{
             'id': '',
             'jobName': '',
@@ -1116,17 +1118,27 @@ myApp.controller('myCtrl', function($scope, $filter) {
         var enddate = new Date($scope.schedules[index].endDate);
         var jobname = $scope.schedules[index].jobName;
         // set the timeout for the scheduler
-        var searchtime = 10
+        var searchtime = 30
         // get results
-        results = residentScheduler(jobss, residentss, startdate, enddate, searchtime)
+        var results = residentScheduler(jobss, residentss, startdate, enddate, searchtime)
         // get the schedule for each resident
-        scheduleByResident = results[0].data
-        scheduleByJob = results[1].data
-        // get statistics for each resident
-        averageHoursPerWeek = results[2].average_hours_per_week
-        frequencyOfNightShifts = results[2].frequency_of_night_shifts
-        fullCalendarDaysOff = results[2].full_calendar_days_off
-        fullCalendarDaysOffPerCycle = results[2].full_calendar_days_off_per_cycle
+        var scheduleByResident = results[0].data
+        var scheduleByJob = results[1].data
+        
+        // push statistics 
+        $scope.schedules[index].statistics.push(results[2].average_hours_per_week);
+        $scope.schedules[index].statistics.push(results[2].frequency_of_night_shifts);
+        $scope.schedules[index].statistics.push(results[2].full_calendar_days_off);
+        $scope.schedules[index].statistics.push(results[2].full_calendar_days_off_per_cycle);
+
+        var averageHoursPerWeek = $scope.schedules[index].statistics[0];
+        var frequencyOfNightShifts = $scope.schedules[index].statistics[1];
+        var fullCalendarDaysOff = $scope.schedules[index].statistics[2];
+        var fullCalendarDaysOffPerCycle = $scope.schedules[index].statistics[3];
+
+        console.log($scope.schedules[index].statistics)
+        
+
 
         // allow the user to set the shift length in hours
         var shiftLength = 12;
@@ -1205,24 +1217,28 @@ myApp.controller('myCtrl', function($scope, $filter) {
                 }
             }
         }
+
+
+       
     }
     // allow the user to view one day at a time, add and subtract days
-    $scope.viewDate = moment().format("ddd, DD MMM YYYY");
-    $scope.viewDateLong = moment($scope.viewDate, "ddd, DD MMM YYYY").format("dddd, MMMM Do YYYY")
+    $scope.viewDate = moment();
+    $scope.viewDateLong = moment($scope.viewDate).format("dddd, MMMM Do YYYY")
+    
 
     $scope.today = function() {
-        $scope.viewDate = moment().format("ddd, DD MMM YYYY");
-        $scope.viewDateLong = moment($scope.viewDate, "ddd, DD MMM YYYY").format("dddd, MMMM Do YYYY")
+        $scope.viewDate = moment();
+        $scope.viewDateLong = moment($scope.viewDate).format("dddd, MMMM Do YYYY")
     }
 
     $scope.increment = function() {
-        $scope.viewDate = moment($scope.viewDate, "ddd, DD MMM YYYY").add(1, "day").format("ddd, DD MMM YYYY");
-        $scope.viewDateLong = moment($scope.viewDate, "ddd, DD MMM YYYY").format("dddd, MMMM Do YYYY")
+        $scope.viewDate = moment($scope.viewDate).add(1, "day");
+        $scope.viewDateLong = moment($scope.viewDate).format("dddd, MMMM Do YYYY")
     }
 
     $scope.decrement = function() {
-        $scope.viewDate = moment($scope.viewDate, "ddd, DD MMM YYYY").subtract(1, "day").format("ddd, DD MMM YYYY");
-        $scope.viewDateLong = moment($scope.viewDate, "ddd, DD MMM YYYY").format("dddd, MMMM Do YYYY")
+        $scope.viewDate = moment($scope.viewDate).subtract(1, "day");
+        $scope.viewDateLong = moment($scope.viewDate).format("dddd, MMMM Do YYYY")
     }
    
 
